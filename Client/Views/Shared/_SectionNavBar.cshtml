@@ -1,0 +1,47 @@
+﻿@using Client.Models
+@{
+        var customerAccount = Session["Account"] as AccountCustomer;
+        var staffAccount =  Session["Account"] as AccountStaff;
+    
+}
+<nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px;" id="mySidebar">
+    <br>
+    <div class="w3-container w3-row">
+        <div class="w3-col s4">
+            <img src="/w3images/avatar2.png" class="w3-circle w3-margin-right" style="width: 46px">
+        </div>
+        <div class="w3-col s8 w3-bar">
+            <span>Welcome,@if(staffAccount!=null){ <strong> @staffAccount.staff.staffName</strong>}
+                          else
+                          {
+                              <strong>@customerAccount.customer.headName</strong> 
+                          }</span><br>
+        </div>
+    </div>
+    <hr>
+    <div class="w3-container">
+        <h5>Dashboard</h5>
+    </div>
+    <div class="w3-bar-block">
+        @if (staffAccount != null)
+        {   
+            <a href="@Url.Action("Index", "Admin")" class="w3-bar-item w3-button w3-padding w3-blue"><i class="fa fa-users fa-fw"></i> Overview</a>
+            <a href="@Url.Action("SettingView", "Admin")" class="w3-bar-item w3-button w3-padding"><i class="fa fa-cog fa-fw"></i> Settings</a>
+            if (User.IsInRole("Admin"))
+            {
+                <a href="@Url.Action("Account", "Admin")" class="w3-bar-item w3-button w3-padding"><i class="fa fa-users fa-fw"></i> Account</a>
+           
+            }
+        }
+        else
+        {
+            <a href="@Url.Action("Order", "Customer")" class="w3-bar-item w3-button w3-padding"><i class="fa fa-diamond fa-fw"></i> Orders</a>
+            <a href="@Url.Action("Payment", "Customer")" class="w3-bar-item w3-button w3-padding"><i class="fa fa-eye fa-fw"></i> Payment</a>
+            <a href="@Url.Action("Order", "Customer")" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bullseye fa-fw"></i> Staff</a>
+        }
+        
+        <a href="@Url.Action("LogOut", "Home")" class="w3-bar-item w3-button w3-padding"><i class="fa fa-power-off"></i> Log out</a>
+
+    </div>
+</nav>
+

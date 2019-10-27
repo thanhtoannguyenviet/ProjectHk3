@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ExcellonModel1.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Account">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="userName" Type="varchar" MaxLength="255" />
+    <Property Name="pass_word" Type="varchar" MaxLength="255" />
+    <Property Name="role_" Type="int" />
+  </EntityType>
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="headEmail" Type="varchar" MaxLength="255" />
+    <Property Name="headPhone" Type="varchar" MaxLength="20" />
+    <Property Name="headName" Type="nvarchar" MaxLength="255" />
+    <Property Name="headBirtday" Type="date" />
+    <Property Name="taxCode" Type="varchar" MaxLength="255" />
+    <Property Name="address_" Type="varchar" MaxLength="255" />
+    <Property Name="checkOTP" Type="bit" />
+    <Property Name="active" Type="int" />
+  </EntityType>
+  <EntityType Name="Detail">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="customerId" Type="int" />
+    <Property Name="staffId" Type="int" />
+    <Property Name="startDate" Type="date" />
+    <Property Name="endDate" Type="date" />
+    <Property Name="amountMoney" Type="decimal" Precision="20" Scale="2" />
+    <Property Name="statusOrder" Type="int" />
+    <Property Name="createDate" Type="date" />
+  </EntityType>
+  <EntityType Name="Img">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="path_" Type="varchar" MaxLength="255" />
+    <Property Name="entryName" Type="varchar" MaxLength="255" />
+    <Property Name="entryId" Type="int" />
+    <Property Name="active" Type="bit" />
+  </EntityType>
+  <EntityType Name="Payment">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="paymentId" Type="varchar" MaxLength="255" />
+    <Property Name="totalMoney" Type="decimal" Precision="20" Scale="2" />
+    <Property Name="customerId" Type="int" />
+    <Property Name="createDate" Type="date" />
+  </EntityType>
+  <EntityType Name="Service_">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="serviceName" Type="nvarchar" MaxLength="255" />
+    <Property Name="staffId" Type="int" />
+  </EntityType>
+  <EntityType Name="Staff">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="staffEmail" Type="varchar" MaxLength="255" />
+    <Property Name="staffPhone" Type="varchar" MaxLength="20" />
+    <Property Name="staffName" Type="nvarchar" MaxLength="255" />
+    <Property Name="staffBirtday" Type="date" />
+    <Property Name="department" Type="varchar" MaxLength="255" />
+    <Property Name="mistakeCount" Type="int" />
+    <Property Name="bankCard" Type="varchar" MaxLength="255" />
+    <Property Name="status_" Type="int" />
+  </EntityType>
+  <EntityType Name="Temp">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="userid" Type="int" />
+    <Property Name="expando" Type="text" />
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <Function Name="checkAccount" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="tableName" Type="varchar" Mode="In" />
+    <Parameter Name="userName" Type="varchar" Mode="In" />
+    <Parameter Name="email" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="updateStatus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <EntityContainer Name="ExcellonModel1StoreContainer">
+    <EntitySet Name="Account" EntityType="Self.Account" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Detail" EntityType="Self.Detail" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Img" EntityType="Self.Img" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Payment" EntityType="Self.Payment" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Service_" EntityType="Self.Service_" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Staff" EntityType="Self.Staff" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Temp" EntityType="Self.Temp" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>

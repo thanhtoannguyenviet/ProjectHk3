@@ -1,0 +1,127 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<header class="w3-container" style="padding-top:22px">
+    <h5><b><i class="fa fa-dashboard"></i> My Dashboard</b></h5>
+</header>
+
+<div class="w3-row-padding w3-margin-bottom">
+    <div class="w3-quarter">
+        <div class="w3-container w3-red w3-padding-16">
+            <div class="w3-left"><i class="fa fa-comment w3-xxxlarge"></i></div>
+            <div class="w3-right">
+                <h3>52</h3>
+            </div>
+            <div class="w3-clear"></div>
+            <h4>Messages</h4>
+        </div>
+    </div>
+    <div class="w3-quarter">
+        <div class="w3-container w3-blue w3-padding-16">
+            <div class="w3-left"><i class="fa fa-eye w3-xxxlarge"></i></div>
+            <div class="w3-right">
+                <h3>99</h3>
+            </div>
+            <div class="w3-clear"></div>
+            <h4>Views</h4>
+        </div>
+    </div>
+    <div class="w3-quarter">
+        <div class="w3-container w3-teal w3-padding-16">
+            <div class="w3-left"><i class="fa fa-share-alt w3-xxxlarge"></i></div>
+            <div class="w3-right">
+                <h3>23</h3>
+            </div>
+            <div class="w3-clear"></div>
+            <h4>Shares</h4>
+        </div>
+    </div>
+    <div class="w3-quarter">
+        <div class="w3-container w3-orange w3-text-white w3-padding-16">
+            <div class="w3-left"><i class="fa fa-users w3-xxxlarge"></i></div>
+            <div class="w3-right">
+                <h3>50</h3>
+            </div>
+            <div class="w3-clear"></div>
+            <h4>Users</h4>
+        </div>
+    </div>
+</div>
+<div class="w3-container">
+    <h5>Feeds</h5>
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr class="table-secondary">
+                    <th>No.</th>
+                    <th>Name Customer</th>
+                    <th>Phone number</th>
+                    <th>Email</th>
+                    <th>Start</th>
+                    <th>End</th>
+                    <th>Earn</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>Lam Van A</td>
+                    <td>012345678</td>
+                    <td>lva1234@gmail.com</td>
+                    <td>11/01/2019</td>
+                    <td>11/02/2019</td>
+                    <td>$7000</td>
+                    <td>
+                        <a class="text-primary" data-toggle="modal" data-target="#exampleModal">
+                            pending
+                        </a>
+                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Success!</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        We send your Request to Tâm Tâm. She will answer you soon.
+                                        Have a nice day!
+                                    </div>
+                                    <div class="modal-footer">
+
+                                        <button type="button" class="btn btn-primary" data-dismiss="modal">Accept</button>
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Deny</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Truong Van B</td>
+                    <td>012345688</td>
+                    <td>tvb@gmail.com</td>
+                    <td>10/17/2019</td>
+                    <td>10/20/2019</td>
+                    <td>$7000</td>
+                    <td><a href="#" class="text-primary">pending</a></td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Tran Van C</td>
+                    <td>012348862</td>
+                    <td>cuongpro123@gmail.com</td>
+                    <td>10/17/2019</td>
+                    <td>10/19/2019</td>
+                    <td>$7000</td>
+                    <td>    <a href="#" class="text-primary">pending</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

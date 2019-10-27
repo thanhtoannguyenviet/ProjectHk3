@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ExcellonModelStoreContainer" CdmEntityContainer="ExcellonEntities1">
+    <EntitySetMapping Name="Accounts">
+      <EntityTypeMapping TypeName="ExcellonModel.Account">
+        <MappingFragment StoreEntitySet="Account">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="userName" ColumnName="userName" />
+          <ScalarProperty Name="pass_word" ColumnName="pass_word" />
+          <ScalarProperty Name="role_" ColumnName="role_" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Customers">
+      <EntityTypeMapping TypeName="ExcellonModel.Customer">
+        <MappingFragment StoreEntitySet="Customer">
+          <ScalarProperty Name="active" ColumnName="active" />
+          <ScalarProperty Name="checkOTP" ColumnName="checkOTP" />
+          <ScalarProperty Name="address_" ColumnName="address_" />
+          <ScalarProperty Name="taxCode" ColumnName="taxCode" />
+          <ScalarProperty Name="headBirtday" ColumnName="headBirtday" />
+          <ScalarProperty Name="headName" ColumnName="headName" />
+          <ScalarProperty Name="headPhone" ColumnName="headPhone" />
+          <ScalarProperty Name="headEmail" ColumnName="headEmail" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Details">
+      <EntityTypeMapping TypeName="ExcellonModel.Detail">
+        <MappingFragment StoreEntitySet="Detail">
+          <ScalarProperty Name="statusOrder" ColumnName="statusOrder" />
+          <ScalarProperty Name="amountMoney" ColumnName="amountMoney" />
+          <ScalarProperty Name="endDate" ColumnName="endDate" />
+          <ScalarProperty Name="startDate" ColumnName="startDate" />
+          <ScalarProperty Name="staffId" ColumnName="staffId" />
+          <ScalarProperty Name="customerId" ColumnName="customerId" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Imgs">
+      <EntityTypeMapping TypeName="ExcellonModel.Img">
+        <MappingFragment StoreEntitySet="Img">
+          <ScalarProperty Name="active" ColumnName="active" />
+          <ScalarProperty Name="entryId" ColumnName="entryId" />
+          <ScalarProperty Name="entryName" ColumnName="entryName" />
+          <ScalarProperty Name="path_" ColumnName="path_" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Payments">
+      <EntityTypeMapping TypeName="ExcellonModel.Payment">
+        <MappingFragment StoreEntitySet="Payment">
+          <ScalarProperty Name="customerId" ColumnName="customerId" />
+          <ScalarProperty Name="totalMoney" ColumnName="totalMoney" />
+          <ScalarProperty Name="paymentId" ColumnName="paymentId" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Service_">
+      <EntityTypeMapping TypeName="ExcellonModel.Service_">
+        <MappingFragment StoreEntitySet="Service_">
+          <ScalarProperty Name="staffId" ColumnName="staffId" />
+          <ScalarProperty Name="serviceName" ColumnName="serviceName" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Staffs">
+      <EntityTypeMapping TypeName="ExcellonModel.Staff">
+        <MappingFragment StoreEntitySet="Staff">
+          <ScalarProperty Name="status_" ColumnName="status_" />
+          <ScalarProperty Name="bankCard" ColumnName="bankCard" />
+          <ScalarProperty Name="mistakeCount" ColumnName="mistakeCount" />
+          <ScalarProperty Name="department" ColumnName="department" />
+          <ScalarProperty Name="staffBirtday" ColumnName="staffBirtday" />
+          <ScalarProperty Name="staffName" ColumnName="staffName" />
+          <ScalarProperty Name="staffPhone" ColumnName="staffPhone" />
+          <ScalarProperty Name="staffEmail" ColumnName="staffEmail" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Temps">
+      <EntityTypeMapping TypeName="ExcellonModel.Temp">
+        <MappingFragment StoreEntitySet="Temp">
+          <ScalarProperty Name="expando" ColumnName="expando" />
+          <ScalarProperty Name="userid" ColumnName="userid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

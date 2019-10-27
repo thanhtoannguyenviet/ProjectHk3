@@ -1,0 +1,336 @@
+﻿* {
+    margin: 0px;
+    padding: 0px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    text-align: center;
+}
+
+.carousel-item img {
+    height: 630px;
+}
+
+header img {
+    height: 70px;
+    width: 70px;
+}
+
+header .row > .col > .nav {
+    float: right;
+}
+
+.nav a {
+    line-height: 60px;
+}
+
+.menu {
+    width: 100%;
+    background-color: #e53935;
+    ;
+}
+
+.allDot {
+    color: white;
+    font-size: 40px;
+    padding: 8px 0;
+    position: absolute;
+    top: 250px;
+    z-index: 10;
+    width: 100%;
+    text-align: center;
+    display: block;
+    background: rgba(14, 28, 127, 0.42);
+}
+
+.menu-link {
+    color: white;
+    padding: 30px;
+}
+
+    .menu-link:hover {
+        color: black;
+    }
+
+#aboutus {
+    background: #ff6659;
+    padding-top: 100px;
+    color: white;
+}
+
+    #aboutus img {
+        padding: 0 30px;
+    }
+
+.box {
+    height: 250px;
+    margin: 20px;
+    text-align: center;
+}
+
+    .box img {
+        height: 200px;
+        width: 200px;
+        margin: auto;
+    }
+
+#PBPG i {
+    font-size: 200px;
+}
+
+#PBPG h3 {
+    padding: 40px;
+    margin: 40px;
+}
+
+    #PBPG h3 i {
+        font-size: 50px;
+    }
+
+#PBPG a {
+    text-align: center;
+    padding: auto;
+    margin: 20px auto;
+}
+
+#PBPG .card-img-tops {
+    text-align: center;
+}
+
+#duan {
+    padding-top: 100px;
+}
+
+    #duan .carousel-inner {
+        height: 600px;
+    }
+
+        #duan .carousel-inner img {
+            height: 500px;
+        }
+
+    #duan .carousel-item-extra {
+        height: 100px;
+        width: 100%;
+        float: left;
+        border: thin black inset;
+    }
+
+        #duan .carousel-item-extra img {
+            height: 90px;
+            width: 160px;
+            float: left;
+            padding: 5px;
+        }
+
+    #duan .carousel-content {
+        height: 100px;
+        width: auto;
+        font-size: 13px;
+        padding: 5px;
+    }
+
+    #duan .bg {
+        color: black;
+        font-weight: bolder;
+        background-color: gray;
+        opacity: 0.7;
+        padding: 0 50px;
+        margin: auto
+    }
+
+#webdev .box {
+    height: 600px;
+    margin: auto;
+    border-radius: 30px;
+}
+
+    #webdev .box img {
+        height: 400px;
+        width: 300px;
+        margin: auto;
+    }
+
+footer {
+    background-color: #e53935;
+    color: whitesmoke;
+    text-align: center;
+}
+
+    footer p {
+        margin: 0px;
+    }
+
+#resigter, #signin {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 100; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    padding-top: 60px;
+}
+
+#tablesign {
+    background-color: #fefefe;
+    margin: 50px auto; /* 15% from the top and centered */
+    width: 35%;
+    border-radius: 15px;
+}
+
+#smalltablesign {
+    width: 95%;
+    height: 80%;
+    background-color: #fff;
+    margin: auto;
+}
+
+    #smalltablesign > input {
+        width: 90%;
+        padding: 12px 20px;
+        border-radius: 5px;
+        border: 1px solid black;
+        font-size: 16px;
+        margin: 8px 20px;
+        display: inline-block;
+        box-sizing: border-box
+    }
+
+#tablereg {
+    width: 100%;
+    height: 60px;
+    background-color: #00B7B4;
+    border-radius: 10px 10px 0 0;
+}
+
+#smalltablereg {
+    width: 90%;
+    margin: auto;
+    line-height: 60px;
+}
+
+    #smalltablereg > button {
+        float: right;
+        margin-top: 20px;
+        border: 0;
+        background-color: transparent;
+    }
+
+        #smalltablereg > button:hover {
+            background-color: mediumaquamarine;
+            border: 2px outset #006CA8;
+            cursor: pointer;
+        }
+
+#footreg {
+    width: 90%;
+    margin: 8px 20px;
+    background-color: #30006B;
+    text-align: center;
+    height: 45px;
+    line-height: 45px;
+    color: white;
+}
+
+    #footreg:hover {
+        cursor: pointer;
+    }
+
+#tablesign a {
+    text-decoration: none;
+    color: gray;
+}
+
+.res p {
+    text-align: center !important;
+    color: gray;
+    padding: 10px;
+}
+
+.res a strong {
+    color: #000;
+}
+/* The Close Button (x) */
+.close {
+    color: #000;
+    font-size: 35px;
+    font-weight: bold;
+    float: right;
+}
+
+    .close:hover,
+    .close:focus {
+        color: red;
+        cursor: pointer;
+    }
+
+/* Add Zoom Animation */
+.animate {
+    -webkit-animation: animatezoom 1s;
+    animation: animatezoom 1s
+}
+
+@-webkit-keyframes animatezoom {
+    from {
+        -webkit-transform: scale(0)
+    }
+
+    to {
+        -webkit-transform: scale(1)
+    }
+}
+
+@keyframes animatezoom {
+    from {
+        transform: scale(0)
+    }
+
+    to {
+        transform: scale(1)
+    }
+}
+
+.sidebar-menu li.active > .treeview-menu {
+    display: block
+}
+
+.sidebar-menu .treeview-menu {
+    display: none;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    padding-left: 5px
+}
+
+    .sidebar-menu .treeview-menu .treeview-menu {
+        padding-left: 20px
+    }
+
+    .sidebar-menu .treeview-menu > li {
+        margin: 0
+    }
+
+        .sidebar-menu .treeview-menu > li > a {
+            padding: 5px 5px 5px 15px;
+            display: block;
+            font-size: 14px;
+            color: #8aa4af
+        }
+
+            .sidebar-menu .treeview-menu > li > a > .fa {
+                width: 20px
+            }
+
+            .sidebar-menu .treeview-menu > li > a > .fa-angle-left,
+            .sidebar-menu .treeview-menu > li > a > .fa-angle-down {
+                width: auto
+            }
+
+            .sidebar-menu .treeview-menu > li.active > a,
+            .sidebar-menu .treeview-menu > li > a:hover {
+                color: #fff
+            }

@@ -1,0 +1,35 @@
+﻿@using Client.Models
+@{
+    var profile = (Account) ViewBag.Account;
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <!-- Sidebar/menu -->
+@{
+    if (ViewBag.NavBar != null)
+    {
+        Html.RenderPartial(ViewBag.NavBar as string);
+    }
+    else
+    {
+        Html.RenderPartial("_SectionNavBar");
+    }
+}
+    <div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+<div class="w3-main" style="margin-left:300px;margin-top:43px;">
+    @RenderBody()
+</div>
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+@Scripts.Render("~/bundles/modernizr")
+@Scripts.Render("~/bundles/jqueryval")
+</body>
+</html>

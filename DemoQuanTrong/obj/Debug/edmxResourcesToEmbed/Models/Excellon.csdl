@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ExcellonModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Account">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="userName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="pass_word" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="role_" Type="Int32" />
+  </EntityType>
+  <EntityContainer Name="ExcellonEntities1" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Accounts" EntityType="Self.Account" />
+    <EntitySet Name="Customers" EntityType="ExcellonModel.Customer" />
+    <EntitySet Name="Details" EntityType="ExcellonModel.Detail" />
+    <EntitySet Name="Imgs" EntityType="ExcellonModel.Img" />
+    <EntitySet Name="Payments" EntityType="ExcellonModel.Payment" />
+    <EntitySet Name="Service_" EntityType="ExcellonModel.Service_" />
+    <EntitySet Name="Staffs" EntityType="ExcellonModel.Staff" />
+    <EntitySet Name="Temps" EntityType="ExcellonModel.Temp" />
+  </EntityContainer>
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="headEmail" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="headPhone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="headName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="headBirtday" Type="DateTime" Precision="0" />
+    <Property Name="taxCode" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="address_" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="checkOTP" Type="Boolean" />
+    <Property Name="active" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Detail">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="customerId" Type="Int32" />
+    <Property Name="staffId" Type="Int32" />
+    <Property Name="startDate" Type="DateTime" Precision="0" />
+    <Property Name="endDate" Type="DateTime" Precision="0" />
+    <Property Name="amountMoney" Type="Decimal" Precision="20" Scale="2" />
+    <Property Name="statusOrder" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Img">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="path_" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="entryName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="entryId" Type="Int32" />
+    <Property Name="active" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="Payment">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="paymentId" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="totalMoney" Type="Decimal" Precision="20" Scale="2" />
+    <Property Name="customerId" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Service_">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="serviceName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="staffId" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Staff">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="staffEmail" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="staffPhone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="staffName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="staffBirtday" Type="DateTime" Precision="0" />
+    <Property Name="department" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="mistakeCount" Type="Int32" />
+    <Property Name="bankCard" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="status_" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Temp">
+    <Key>
+      <PropertyRef Name="userid" />
+    </Key>
+    <Property Name="userid" Type="Int32" Nullable="false" />
+    <Property Name="expando" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+  </EntityType>
+</Schema>

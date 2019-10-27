@@ -1,0 +1,153 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <header class="sticky-top bg-info">
+        <div class="container">
+            <div class="row">
+                <div class="col-2 nav">
+                    @Html.ActionLink("Excell-On Services", "Index", "Home", new { area = "" }, new { @class = "navbar-brand text-light " })
+                </div>
+                <div class="col">
+                    <ul class="nav float-left">
+                        <li class="nav-item">
+                            @Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link active text-light" })
+                        </li>
+                        <li class="nav-item">
+                            @Html.ActionLink("About", "Index", "Home", new { area = "" }, new { @class = "nav-link text-light" })
+                        </li>
+                        <li class="nav-item">
+                            @Html.ActionLink("Page", "Index", "Home", new { area = "" }, new { @class = "nav-link text-light" })
+                        </li>
+                        <li class="nav-item">
+                            @Html.ActionLink("Contact", "Index", "Home", new { area = "" }, new { @class = "nav-link text-light" })
+                        </li>
+                    </ul>
+                    <ul class="nav float-right">
+                        <li class="nav-item">
+                            <a class="nav-link text-light" href="#" onclick="signin()">Log in</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" href="#" onclick="resigter()">Register</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div id="signin">
+            <div id="tablesign" class="animate">
+                <div id="tablereg" class="bg-info">
+                    <div id="smalltablereg">Login <span onclick="document.getElementById('signin').style.display = 'none'" class="close" title="Exit">&times;</span></div>
+                </div>
+                <div id="smalltablesign">
+                    @using (Html.BeginForm("Login","Home",FormMethod.Post)) 
+                    {
+                        @Html.AntiForgeryToken()
+    
+                        <div class="form-horizontal">
+                            @Html.ValidationSummary(true,"",new {@class="text-danger"})
+                            <hr />
+                          
+                            <div class="form-group">
+                                <label for="UserAccount">Username:</label>
+                                <input type="text" class="form-control" name="UserAccount" id="UserAccount" aria-describedby="emailHelp" placeholder="Enter fullname">
+                            </div>
+                            <div class="form-group">
+                                <label for="PasswordAccount">Password:</label>
+                                <input type="password" class="form-control" name="PasswordAccount" id="PasswordAccount" placeholder="Enter password">
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-10">
+                                    <input type="submit" value="Log In" class="btn btn-default" />
+                                </div>
+                            </div>
+                        </div>
+                    }
+                        <div class="res">
+                            <p>
+                                Don't have an account?<a onclick="document.getElementById('signin').style.display = 'none';resigter();"><strong>Resigter now</strong></a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+<div id="resigter">
+
+        <div id="tablesign" class="animate">
+            <div id="tablereg">
+                <div id="smalltablereg">Register <span onclick="document.getElementById('resigter').style.display='none'" class="close" title="Exit">&times;</span></div>
+            </div>
+            <div id="smalltablesign">
+            @using (Html.BeginForm("Register","Home",FormMethod.Post)) 
+            {
+                
+                    <div class="form-group">
+                        <label for="Fullname">Full name</label>
+                        <input type="text" class="form-control" name="Fullname" id="Fullname" aria-describedby="emailHelp" placeholder="Enter fullname">
+                    </div>
+                <div class="form-group"> 
+                    <label for="Email">Email address</label>
+                    <input type="email" class="form-control" name="Email" id="Email" aria-describedby="emailHelp" placeholder="Enter email">
+                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                </div>
+                <div class="form-group"> 
+                    <label for="Username">Username:</label>
+                    <input type="email" class="form-control" name="Username" id="Username"  placeholder="Enter email">
+                </div>
+                    <div class="form-group">
+                        <label for="Password">Password</label>
+                        <input type="password" class="form-control" name="Password" id="Password" placeholder="Enter password">
+                    </div>
+                    <div class="form-group">
+                        <label for="Confpassword">Confirm Password</label>
+                        <input type="password" class="form-control" name="Confpassword" id="Confpassword" placeholder="Enter password">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="Phone">Phone:</label>
+                        <input type="text" class="form-control" name="Phone" id="Phone" placeholder="Enter password again">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="Birthday">Birthday:</label>
+                        <input type="text" class="form-control" name="Birthday" id="Birthday" placeholder="Enter password again">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="taxCode">Tax Code:</label>
+                        <input type="text" class="form-control" name="taxCode" id="taxCode" placeholder="Enter password again">
+                    </div>
+                    <input type="submit" value="Registe" class="btn btn-default" />
+            }
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        @RenderBody()
+        <hr />
+        <footer class="bg-info">
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>
+    </div>
+    <script type="text/javascript">
+        if ("@ViewBag.Error" === "1") {
+            
+            alert("Account's Invalid'");
+        }
+
+    </script>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jqueryval")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
