@@ -30,7 +30,7 @@ namespace DemoQuanTrong.Controllers
                 {
                     using (var entity = new ExcellonEntities1())
                     {
-                        var result = entity.checkAccount(ConstantTable.STAFF, accountStaff.account.userName, accountStaff.staff.staffEmail);
+                        var result = entity.checkAccount(ConstantTable.STAFF, accountStaff.account.userName, accountStaff.staff.staffEmail).ToList();
                         if (result != null)
                         {
                             accountStaff.messsage = MessageError.EXIST;

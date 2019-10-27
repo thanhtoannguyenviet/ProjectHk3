@@ -30,24 +30,24 @@ namespace DemoQuanTrong.Controllers
             }
 
         }
-        [HttpGet]
-        [Route("loginStaff/{id}")]
-        public IHttpActionResult loginStaff(int id)
+        [HttpPost]
+        [Route("loginStaff/")]
+        public IHttpActionResult loginStaff([FromBody] Account account)
         {
-           
-            string query = CustomSQL.checkRole(ConstantTable.STAFF, id + "");
+
+            string query = CustomSQL.checkRole(ConstantTable.STAFF, account.id + "");
             using (var entities = new ExcellonEntities1())
             {
 
                 Staff staff = entities.Staffs
                    .SqlQuery(query)
                    .ToList<Staff>().DefaultIfEmpty(null).First();
-                string queryImg = CustomSQL.getImg(ConstantTable.STAFF, id + "");
+                string queryImg = CustomSQL.getImg(ConstantTable.STAFF, account.id + "");
                 var imgs = entities.Imgs
                         .SqlQuery(queryImg)
                         .ToList<Img>();
                 AccountStaff accountStaff = new AccountStaff();
-                accountStaff.account = new Account();
+                accountStaff.account = account;
                 accountStaff.staff = staff;
                 if (imgs != null && imgs.Count > 0)
                 {
@@ -60,24 +60,24 @@ namespace DemoQuanTrong.Controllers
 
         }
 
-        [HttpGet]
-        [Route("loginCustomer/{id}")]
-        public IHttpActionResult loginCustomer(int id)
+        [HttpPost]
+        [Route("loginCustomer/")]
+        public IHttpActionResult loginCustomer([FromBody] Account account)
         {
 
-            string query = CustomSQL.checkRole(ConstantTable.CUSTOMER, id + "");
+            string query = CustomSQL.checkRole(ConstantTable.CUSTOMER, account.id + "");
             using (var entities = new ExcellonEntities1())
             {
 
                 Customer customer = entities.Customers
                    .SqlQuery(query)
                    .ToList<Customer>().DefaultIfEmpty(null).First();
-                string queryImg = CustomSQL.getImg(ConstantTable.CUSTOMER, id + "");
+                string queryImg = CustomSQL.getImg(ConstantTable.CUSTOMER, account.id + "");
                 var img = entities.Imgs
                         .SqlQuery(queryImg)
                         .ToList<Img>().DefaultIfEmpty(null).First();
                 AccountCustomer accountCustomer = new AccountCustomer();
-                accountCustomer.account = new Account();
+                accountCustomer.account = account;
                 accountCustomer.customer = customer;
                 accountCustomer.img = img;
                 return Ok(accountCustomer);

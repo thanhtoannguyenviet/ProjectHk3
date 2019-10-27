@@ -38,9 +38,8 @@ namespace Client.Controllers
             var PATHIMG = "~/Images/";
             var ENTRYNAME = "01.jpg";
             accountStaff.staff.status_ = 1;
-            accountStaff.imgs[0].path_ = PATHIMG;
-            accountStaff.imgs[0].entryName = ENTRYNAME;
-            accountStaff.imgs[0].entryId = accountStaff.staff.id;
+            accountStaff.imgs=new List<Img>();
+            accountStaff.imgs.Add(new Img(accountStaff.staff.id));
             accountStaff = RegisterStaff(accountStaff);
             return Redirect("/Admin/");
         }

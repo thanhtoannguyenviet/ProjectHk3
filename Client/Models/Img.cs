@@ -12,5 +12,14 @@ namespace Client.Models
         public string entryName { get; set; }
         public int? entryId { get; set; }
         public bool? active { get; set; }
+
+        public Img(int entryId)
+        {
+            path_ = "~/Images/";
+            entryName = "01.jpg";
+            this.entryId = entryId;
+            active = true;
+        }
+        public Img(){}
     }
 }

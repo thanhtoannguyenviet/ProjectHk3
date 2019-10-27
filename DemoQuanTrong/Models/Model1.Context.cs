@@ -14,19 +14,19 @@ namespace DemoQuanTrong.Models
     using System.Data.Entity.Infrastructure;
     using System.Data.Entity.Core.Objects;
     using System.Linq;
-
+    
     public partial class ExcellonEntities1 : DbContext
     {
         public ExcellonEntities1()
             : base("name=ExcellonEntities1")
         {
         }
-
+    
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
         }
-
+    
         public virtual DbSet<Account> Accounts { get; set; }
         public virtual DbSet<Customer> Customers { get; set; }
         public virtual DbSet<Detail> Details { get; set; }
@@ -35,27 +35,27 @@ namespace DemoQuanTrong.Models
         public virtual DbSet<Service_> Service_ { get; set; }
         public virtual DbSet<Staff> Staffs { get; set; }
         public virtual DbSet<Temp> Temps { get; set; }
-
-        public virtual int updateStatus()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("updateStatus");
-        }
-
+    
         public virtual ObjectResult<checkAccount_Result> checkAccount(string tableName, string userName, string email)
         {
             var tableNameParameter = tableName != null ?
                 new ObjectParameter("tableName", tableName) :
                 new ObjectParameter("tableName", typeof(string));
-
+    
             var userNameParameter = userName != null ?
                 new ObjectParameter("userName", userName) :
                 new ObjectParameter("userName", typeof(string));
-
+    
             var emailParameter = email != null ?
                 new ObjectParameter("email", email) :
                 new ObjectParameter("email", typeof(string));
-
+    
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<checkAccount_Result>("checkAccount", tableNameParameter, userNameParameter, emailParameter);
+        }
+    
+        public virtual int updateStatus()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("updateStatus");
         }
     }
 }

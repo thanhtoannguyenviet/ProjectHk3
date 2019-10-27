@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
+using System.Text;
 using System.Web;
 using System.Web.Script.Serialization;
 using Client.Models;
@@ -42,42 +44,35 @@ namespace Client.Service
         }
         public static AccountStaff LoginStaff(Account account)
         {
-                using (var client = new HttpClient())
+            using (HttpClient client = new HttpClient())
             {
-                var obj = JsonConvert.SerializeObject(account);
-                client.BaseAddress = new Uri("http://localhost:61143/api/account/loginStaff/" + account.id);
-                    var responseTask = client.GetAsync(client.BaseAddress);
-                    responseTask.Wait();
+                client.DefaultRequestHeaders.Accept.Clear();
+                var response = client.PostAsync("http://localhost:61143/api/account/loginStaff/", new StringContent(
+                    new JavaScriptSerializer().Serialize(account), Encoding.UTF8, "application/json")).Result;
+                if (response.StatusCode == HttpStatusCode.OK)
+                {
+                    var readTask = JsonConvert.DeserializeObject<AccountStaff>(response.Content.ReadAsStringAsync().Result);
 
-                    var result = responseTask.Result;
-                    if (result.IsSuccessStatusCode)
-                    {
-
-                        var readTask = JsonConvert.DeserializeObject<AccountStaff>(result.Content.ReadAsStringAsync().Result);
-                        return readTask; // nếu return ngay đây sao k return lại method trên luôn
-                    }
-                    return null;
+                    return readTask;
                 }
-            
+            }
+            return null;
         }
         public static AccountCustomer LoginCustomer(Account account)
         {
-            var jsonCustomer = new JavaScriptSerializer().Serialize(account);
-            using (var client = new HttpClient())
+            using (HttpClient client = new HttpClient())
             {
-                client.BaseAddress = new Uri("http://localhost:61143/api/account/loginCustomer/" + account.id);
-                //HTTP GET
-                var responseTask = client.GetAsync(client.BaseAddress);
-                responseTask.Wait();
-
-                var result = responseTask.Result;
-                if (result.IsSuccessStatusCode)
+                client.DefaultRequestHeaders.Accept.Clear();
+                var response = client.PostAsync("http://localhost:61143/api/account/loginCustomer/", new StringContent(
+                    new JavaScriptSerializer().Serialize(account), Encoding.UTF8, "application/json")).Result;
+                if (response.StatusCode == HttpStatusCode.OK)
                 {
-                    var readTask = JsonConvert.DeserializeObject<AccountCustomer>(result.Content.ReadAsStringAsync().Result);
-                    return readTask; // nếu return ngay đây sao k return lại method trên luôn
+                    var readTask = JsonConvert.DeserializeObject<AccountCustomer>(response.Content.ReadAsStringAsync().Result);
+
+                    return readTask;
                 }
-                return null;
             }
+            return null;
         }
     }
 }

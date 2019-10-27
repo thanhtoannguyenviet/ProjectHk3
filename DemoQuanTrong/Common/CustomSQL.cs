@@ -15,7 +15,7 @@ namespace DemoQuanTrong.Common
 
         private static string defaultCount()
         {
-            return "SELECT COUNT(A.*) FROM $TABLE$ A"; //nếu thêm where thì đuôi add thêm $ANDWHERE
+            return "SELECT COUNT(*) FROM $TABLE$ A"; //nếu thêm where thì đuôi add thêm $ANDWHERE
         }
         public static string QuerySelect(string tableName, Filter filter = null)
         {
@@ -123,10 +123,6 @@ namespace DemoQuanTrong.Common
         public static string getStaffForCustomer(Filter filter, Boolean count = false)
         {
             string query = CustomSQL.QuerySelect(ConstantTable.STAFF);
-            if (count)
-            {
-                query = CustomSQL.QueryCount(ConstantTable.STAFF);
-            }
             query += " INNER JOIN Account B ON A.id = B.id ";
             query = CustomSQL.SQLLessWhere(query, "role_", 25 + "");
             if (filter != null)
