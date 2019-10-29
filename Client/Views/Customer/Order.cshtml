@@ -1,8 +1,27 @@
-﻿@model dynamic
+﻿@model IEnumerable<Client.Models.Detail>
 
 @{
     ViewBag.Title = "title";
-    Layout = "_Layout";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h2>title</h2>
+<h2>All Order Of You</h2>
+<div class="modal-content">
+    <div class="w3-row-padding" id="Content">
+        @Html.Partial("_AllOrder",Model);
+    </div>
+</div>
+<div class="w3-center w3-padding-32">
+  
+    <div class="w3-bar">
+        @for (int i = 0; i <= ViewBag.Count; i++)
+        {
+            @Ajax.ActionLink(""+(i+1), "StaffCanHire","Customer",new {id=i},new AjaxOptions
+            {
+                HttpMethod="GET",
+                InsertionMode = InsertionMode.Replace,
+                UpdateTargetId = "Content"
+            })
+        }
+    </div>
+</div>

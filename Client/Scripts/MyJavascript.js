@@ -55,22 +55,16 @@ function w3_close() {
     overlayBg.style.display = "none";
 }
 
-function RegistNewStaff() {
-    var Staff = {
-        "Fullname": $("#Fullname").val(),
-        "Username": $("#Username").val(),
-        "Email": $("#Email").val(),
-        "Password": $("#Password").val(),
-        "Email": $("#Email").val(),
-        "Phone": $("#Phone").val(),
-        "BankCard": $("#BankCard").val(),
+function changeImage(input) {
+    var ext = input.files[0]['name'].substring(input.files[0]['name'].lastIndexOf('.') + 1).toLowerCase();
+    if (input.files && input.files[0] && (ext == "gif" || ext == "png" || ext == "jpeg" || ext == "jpg")) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            $('#Image').attr('src', e.target.result);
+        }
+        reader.readAsDataURL(input.files[0]);
     }
-    $.ajax({
-        type: "POST",
-        url: "http://localhost:61143/api/account/AddNew",
-        data: JSON.stringify(Staff),
-        contentType: 'application/json;charset=utf-8',
-        success: alert("Success"),
-        error: xhr => alert(xhr.responseText)
-    })
+    else {
+        $('#Image').attr('src', '/Image/jpg.png');
+    }
 }

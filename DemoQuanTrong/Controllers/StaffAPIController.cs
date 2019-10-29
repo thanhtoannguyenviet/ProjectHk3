@@ -31,7 +31,7 @@ namespace DemoQuanTrong.Controllers
                     using (var entity = new ExcellonEntities1())
                     {
                         var result = entity.checkAccount(ConstantTable.STAFF, accountStaff.account.userName, accountStaff.staff.staffEmail).ToList();
-                        if (result != null)
+                        if (result.Count() > 0)
                         {
                             accountStaff.messsage = MessageError.EXIST;
                             return Ok(accountStaff);
@@ -82,17 +82,17 @@ namespace DemoQuanTrong.Controllers
                 {
                     using (var entity = new ExcellonEntities1())
                     {
-                        var result = entity.checkAccount(ConstantTable.STAFF, accountStaff.account.userName, accountStaff.staff.staffEmail);
-                        if (result != null)
+                        var result = entity.checkAccount(ConstantTable.STAFF, accountStaff.account.userName, accountStaff.staff.staffEmail).ToList();
+                        if (result.Count() > 0)
                         {
                             accountStaff.messsage = MessageError.EXIST;
                             return Ok(accountStaff);
                         }
                     }
-                    db.Entry(accountStaff.account);
+                    db.Entry(accountStaff.account).State = EntityState.Modified;
                     db.SaveChanges();
                     accountStaff.staff.id = accountStaff.account.id;
-                    db.Entry(accountStaff.staff);
+                    db.Entry(accountStaff.staff).State = EntityState.Modified;
                     db.SaveChanges();
                     if (accountStaff.imgs != null && accountStaff.imgs.Count() > 0)
                     {
@@ -125,7 +125,7 @@ namespace DemoQuanTrong.Controllers
             }
             try
             {
-                db.Imgs.Add(img);
+                db.Entry(img).State = EntityState.Modified;
                 db.SaveChanges();
 
             }
@@ -180,9 +180,6 @@ namespace DemoQuanTrong.Controllers
             {
                 if (accountStaff.account != null && accountStaff.staff != null && accountStaff.services != null && accountStaff.services.Count() > 0)
                 {
-
-                    db.Accounts.Add(accountStaff.account);
-                    db.SaveChanges();
                     foreach (var item in accountStaff.services)
                     {
                         db.Service_.Add(item);

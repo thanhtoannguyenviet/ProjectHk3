@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="ExcellonModel1.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="ExcellonModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Account">
           <Key>
             <PropertyRef Name="id" />
@@ -97,7 +97,7 @@
           <Parameter Name="email" Type="varchar" Mode="In" />
         </Function>
         <Function Name="updateStatus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
-        <EntityContainer Name="ExcellonModel1StoreContainer">
+        <EntityContainer Name="ExcellonModelStoreContainer">
           <EntitySet Name="Account" EntityType="Self.Account" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Detail" EntityType="Self.Detail" Schema="dbo" store:Type="Tables" />
@@ -107,10 +107,11 @@
           <EntitySet Name="Staff" EntityType="Self.Staff" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Temp" EntityType="Self.Temp" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="ExcellonModel1" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="ExcellonModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="Account">
           <Key>
             <PropertyRef Name="id" />
@@ -206,7 +207,7 @@
           <EntitySet Name="Service_" EntityType="Self.Service_" />
           <EntitySet Name="Staffs" EntityType="Self.Staff" />
           <EntitySet Name="Temps" EntityType="Self.Temp" />
-          <FunctionImport Name="checkAccount" ReturnType="Collection(ExcellonModel1.checkAccount_Result)">
+          <FunctionImport Name="checkAccount" ReturnType="Collection(ExcellonModel.checkAccount_Result)">
             <Parameter Name="tableName" Mode="In" Type="String" />
             <Parameter Name="userName" Mode="In" Type="String" />
             <Parameter Name="email" Mode="In" Type="String" />
@@ -218,24 +219,15 @@
           <Property Type="String" Name="userName" Nullable="true" MaxLength="255" />
           <Property Type="String" Name="pass_word" Nullable="true" MaxLength="255" />
           <Property Type="Int32" Name="role_" Nullable="true" />
-          <Property Type="Int32" Name="id1" Nullable="false" />
-          <Property Type="String" Name="headEmail" Nullable="true" MaxLength="255" />
-          <Property Type="String" Name="headPhone" Nullable="true" MaxLength="20" />
-          <Property Type="String" Name="headName" Nullable="true" MaxLength="255" />
-          <Property Type="DateTime" Name="headBirtday" Nullable="true" />
-          <Property Type="String" Name="taxCode" Nullable="true" MaxLength="255" />
-          <Property Type="String" Name="address_" Nullable="true" MaxLength="255" />
-          <Property Type="Boolean" Name="checkOTP" Nullable="true" />
-          <Property Type="Int32" Name="active" Nullable="true" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="ExcellonModel1StoreContainer" CdmEntityContainer="ExcellonEntities1">
+        <EntityContainerMapping StorageEntityContainer="ExcellonModelStoreContainer" CdmEntityContainer="ExcellonEntities1">
           <EntitySetMapping Name="Accounts">
-            <EntityTypeMapping TypeName="ExcellonModel1.Account">
+            <EntityTypeMapping TypeName="ExcellonModel.Account">
               <MappingFragment StoreEntitySet="Account">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="userName" ColumnName="userName" />
@@ -245,7 +237,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Customers">
-            <EntityTypeMapping TypeName="ExcellonModel1.Customer">
+            <EntityTypeMapping TypeName="ExcellonModel.Customer">
               <MappingFragment StoreEntitySet="Customer">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="headEmail" ColumnName="headEmail" />
@@ -260,7 +252,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Details">
-            <EntityTypeMapping TypeName="ExcellonModel1.Detail">
+            <EntityTypeMapping TypeName="ExcellonModel.Detail">
               <MappingFragment StoreEntitySet="Detail">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="customerId" ColumnName="customerId" />
@@ -274,7 +266,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Imgs">
-            <EntityTypeMapping TypeName="ExcellonModel1.Img">
+            <EntityTypeMapping TypeName="ExcellonModel.Img">
               <MappingFragment StoreEntitySet="Img">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="path_" ColumnName="path_" />
@@ -285,7 +277,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Payments">
-            <EntityTypeMapping TypeName="ExcellonModel1.Payment">
+            <EntityTypeMapping TypeName="ExcellonModel.Payment">
               <MappingFragment StoreEntitySet="Payment">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="paymentId" ColumnName="paymentId" />
@@ -296,7 +288,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Service_">
-            <EntityTypeMapping TypeName="ExcellonModel1.Service_">
+            <EntityTypeMapping TypeName="ExcellonModel.Service_">
               <MappingFragment StoreEntitySet="Service_">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="serviceName" ColumnName="serviceName" />
@@ -305,7 +297,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Staffs">
-            <EntityTypeMapping TypeName="ExcellonModel1.Staff">
+            <EntityTypeMapping TypeName="ExcellonModel.Staff">
               <MappingFragment StoreEntitySet="Staff">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="staffEmail" ColumnName="staffEmail" />
@@ -320,7 +312,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Temps">
-            <EntityTypeMapping TypeName="ExcellonModel1.Temp">
+            <EntityTypeMapping TypeName="ExcellonModel.Temp">
               <MappingFragment StoreEntitySet="Temp">
                 <ScalarProperty Name="userid" ColumnName="userid" />
                 <ScalarProperty Name="expando" ColumnName="expando" />
@@ -328,26 +320,17 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="checkAccount" FunctionName="ExcellonModel1.Store.checkAccount">
+          <FunctionImportMapping FunctionImportName="checkAccount" FunctionName="ExcellonModel.Store.checkAccount">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="ExcellonModel1.checkAccount_Result">
+              <ComplexTypeMapping TypeName="ExcellonModel.checkAccount_Result">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="userName" ColumnName="userName" />
                 <ScalarProperty Name="pass_word" ColumnName="pass_word" />
                 <ScalarProperty Name="role_" ColumnName="role_" />
-                <ScalarProperty Name="id1" ColumnName="id1" />
-                <ScalarProperty Name="headEmail" ColumnName="headEmail" />
-                <ScalarProperty Name="headPhone" ColumnName="headPhone" />
-                <ScalarProperty Name="headName" ColumnName="headName" />
-                <ScalarProperty Name="headBirtday" ColumnName="headBirtday" />
-                <ScalarProperty Name="taxCode" ColumnName="taxCode" />
-                <ScalarProperty Name="address_" ColumnName="address_" />
-                <ScalarProperty Name="checkOTP" ColumnName="checkOTP" />
-                <ScalarProperty Name="active" ColumnName="active" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="updateStatus" FunctionName="ExcellonModel1.Store.updateStatus" />
+          <FunctionImportMapping FunctionImportName="updateStatus" FunctionName="ExcellonModel.Store.updateStatus" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

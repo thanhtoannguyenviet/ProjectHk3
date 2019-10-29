@@ -1,0 +1,37 @@
+﻿@model IEnumerable<Client.Models.AccountStaff>
+
+@foreach (var item in Model){
+            <div class="w3-col m4 w3-margin-bottom">
+                <div class="w3-light-grey">
+                    <img src="@Url.Content(item.imgs[0].path_)" alt="John" style="width: 100%">
+
+                    <div class="w3-container">
+                        <h3>@item.staff.staffName</h3>
+                        <p class="w3-opacity">@item.staff.department</p>
+                        <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</p>
+                        <button type="button" class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#exampleModal">
+                            Pick me
+                        </button>
+                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Success!</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        We send your Request to Tâm Tâm. She will answer you soon.
+                                        Have a nice day!
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }

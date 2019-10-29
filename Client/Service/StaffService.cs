@@ -30,7 +30,7 @@ namespace Client.Service
             using (HttpClient client = new HttpClient())
             {
                 client.DefaultRequestHeaders.Accept.Clear();
-                var response = client.PostAsync("http://localhost:61143/api/staff/updateStaff/", new StringContent(
+                var response = client.PutAsync("http://localhost:61143/api/staff/updateStaff/", new StringContent(
                     new JavaScriptSerializer().Serialize(accountStaff), Encoding.UTF8, "application/json")).Result;
                 if (response.StatusCode == HttpStatusCode.OK)
                     return accountStaff;
@@ -69,7 +69,7 @@ namespace Client.Service
             using (HttpClient client = new HttpClient())
             {
                 client.DefaultRequestHeaders.Accept.Clear();
-                var response = client.PostAsync("http://localhost:61143/api/staff/updateImg/", new StringContent(
+                var response = client.PutAsync("http://localhost:61143/api/staff/updateImg/", new StringContent(
                     new JavaScriptSerializer().Serialize(imgStaff), Encoding.UTF8, "application/json")).Result;
                 if (response.StatusCode == HttpStatusCode.OK)
                     return imgStaff;

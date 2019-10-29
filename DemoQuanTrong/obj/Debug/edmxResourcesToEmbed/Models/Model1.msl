@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="ExcellonModel1StoreContainer" CdmEntityContainer="ExcellonEntities1">
+  <EntityContainerMapping StorageEntityContainer="ExcellonModelStoreContainer" CdmEntityContainer="ExcellonEntities1">
     <EntitySetMapping Name="Accounts">
-      <EntityTypeMapping TypeName="ExcellonModel1.Account">
+      <EntityTypeMapping TypeName="ExcellonModel.Account">
         <MappingFragment StoreEntitySet="Account">
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="userName" ColumnName="userName" />
@@ -12,7 +12,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Customers">
-      <EntityTypeMapping TypeName="ExcellonModel1.Customer">
+      <EntityTypeMapping TypeName="ExcellonModel.Customer">
         <MappingFragment StoreEntitySet="Customer">
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="headEmail" ColumnName="headEmail" />
@@ -27,7 +27,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Details">
-      <EntityTypeMapping TypeName="ExcellonModel1.Detail">
+      <EntityTypeMapping TypeName="ExcellonModel.Detail">
         <MappingFragment StoreEntitySet="Detail">
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="customerId" ColumnName="customerId" />
@@ -41,7 +41,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Imgs">
-      <EntityTypeMapping TypeName="ExcellonModel1.Img">
+      <EntityTypeMapping TypeName="ExcellonModel.Img">
         <MappingFragment StoreEntitySet="Img">
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="path_" ColumnName="path_" />
@@ -52,7 +52,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Payments">
-      <EntityTypeMapping TypeName="ExcellonModel1.Payment">
+      <EntityTypeMapping TypeName="ExcellonModel.Payment">
         <MappingFragment StoreEntitySet="Payment">
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="paymentId" ColumnName="paymentId" />
@@ -63,7 +63,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Service_">
-      <EntityTypeMapping TypeName="ExcellonModel1.Service_">
+      <EntityTypeMapping TypeName="ExcellonModel.Service_">
         <MappingFragment StoreEntitySet="Service_">
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="serviceName" ColumnName="serviceName" />
@@ -72,7 +72,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Staffs">
-      <EntityTypeMapping TypeName="ExcellonModel1.Staff">
+      <EntityTypeMapping TypeName="ExcellonModel.Staff">
         <MappingFragment StoreEntitySet="Staff">
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="staffEmail" ColumnName="staffEmail" />
@@ -87,7 +87,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Temps">
-      <EntityTypeMapping TypeName="ExcellonModel1.Temp">
+      <EntityTypeMapping TypeName="ExcellonModel.Temp">
         <MappingFragment StoreEntitySet="Temp">
           <ScalarProperty Name="userid" ColumnName="userid" />
           <ScalarProperty Name="expando" ColumnName="expando" />
@@ -95,25 +95,16 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <FunctionImportMapping FunctionImportName="checkAccount" FunctionName="ExcellonModel1.Store.checkAccount">
+    <FunctionImportMapping FunctionImportName="checkAccount" FunctionName="ExcellonModel.Store.checkAccount">
       <ResultMapping>
-        <ComplexTypeMapping TypeName="ExcellonModel1.checkAccount_Result">
+        <ComplexTypeMapping TypeName="ExcellonModel.checkAccount_Result">
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="userName" ColumnName="userName" />
           <ScalarProperty Name="pass_word" ColumnName="pass_word" />
           <ScalarProperty Name="role_" ColumnName="role_" />
-          <ScalarProperty Name="id1" ColumnName="id1" />
-          <ScalarProperty Name="headEmail" ColumnName="headEmail" />
-          <ScalarProperty Name="headPhone" ColumnName="headPhone" />
-          <ScalarProperty Name="headName" ColumnName="headName" />
-          <ScalarProperty Name="headBirtday" ColumnName="headBirtday" />
-          <ScalarProperty Name="taxCode" ColumnName="taxCode" />
-          <ScalarProperty Name="address_" ColumnName="address_" />
-          <ScalarProperty Name="checkOTP" ColumnName="checkOTP" />
-          <ScalarProperty Name="active" ColumnName="active" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="updateStatus" FunctionName="ExcellonModel1.Store.updateStatus" />
+    <FunctionImportMapping FunctionImportName="updateStatus" FunctionName="ExcellonModel.Store.updateStatus" />
   </EntityContainerMapping>
 </Mapping>

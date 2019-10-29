@@ -114,6 +114,17 @@ namespace DemoQuanTrong.Common
             else
                 return query += " WHERE " + column + " < " + condition + " $ANDWHERE ";
         }
+        private static string SQLMoreWhere(string query, string column, string condition, bool stringColumn = false)
+        {
+            if (stringColumn)
+            {
+                condition = formatCondition(condition);
+            }
+            if (query.Contains("$ANDWHERE"))
+                return query.Replace("$ANDWHERE", " AND " + column + " > " + condition + " $ANDWHERE ");
+            else
+                return query += " WHERE " + column + " > " + condition + " $ANDWHERE ";
+        }
         public static string clear(string query)
         {
             if (query.Contains("$ANDWHERE"))
@@ -125,6 +136,7 @@ namespace DemoQuanTrong.Common
             string query = CustomSQL.QuerySelect(ConstantTable.STAFF);
             query += " INNER JOIN Account B ON A.id = B.id ";
             query = CustomSQL.SQLLessWhere(query, "role_", 25 + "");
+            query = CustomSQL.SQLMoreWhere(query, "status_", -1 + "");
             if (filter != null)
                 query = CustomSQL.SQLSearch(query, filter.keyword, "staffName");
             if (!count)
@@ -139,6 +151,7 @@ namespace DemoQuanTrong.Common
             string query = CustomSQL.QuerySelect(ConstantTable.STAFF);
             query += " INNER JOIN Account B ON A.id = B.id ";
             query = CustomSQL.SQLLessWhere(query, "role_", 25 + "");
+            query = CustomSQL.SQLMoreWhere(query, "status_", -1 + "");
             if (filter != null)
                 query = CustomSQL.SQLSearch(query, filter.keyword, "staffName");
             if (id != 0)
@@ -190,8 +203,5 @@ namespace DemoQuanTrong.Common
             return clear(query); ;
         }
 
-
     }
-
-
 }

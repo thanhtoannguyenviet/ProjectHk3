@@ -15,8 +15,7 @@ namespace Client.Models
 
         public Img(int entryId)
         {
-            path_ = "~/Images/";
-            entryName = "01.jpg";
+            path_ = "~/Images/01.jpg";
             this.entryId = entryId;
             active = true;
         }

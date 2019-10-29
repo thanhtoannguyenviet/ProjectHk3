@@ -10,32 +10,26 @@ using Newtonsoft.Json;
 using static Client.Service.CustomerService;
 namespace Client.Controllers
 {
-    [Authorize]
     public class CustomerController : Controller
     {
         // GET: Customer
-
-        [Authorize(Roles = "Customer")]
         public ActionResult Index()
         {
-            ViewBag.Count = CountStaffCustomer();
+            int pageNummber = CountStaffCustomer()/3;
+            ViewBag.Count = pageNummber;
             return View(GetStaffCustomer(0));
         }
 
-
-        [Authorize(Roles = "Customer")]
-        [HttpPost]
-        public ActionResult Index(int id)
+        public ActionResult StaffCanHire(int id)
         {
-            return View(GetStaffCustomer(id));
+            return PartialView("_StaffCanHire", GetStaffCustomer(id));
         }
 
-        [Authorize(Roles = "Customer")]
         public ActionResult Order()
         {
             var session = Session["Account"]  as AccountCustomer;
             var customer = session.customer;
-            ViewBag.Count = CountAllOrder(customer);
+            ViewBag.Count = CountAllOrder(customer)/3;
             return View(GetAllOrder(customer, 0));
         }
 

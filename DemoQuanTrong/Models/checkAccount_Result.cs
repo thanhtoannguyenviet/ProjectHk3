@@ -17,14 +17,5 @@ namespace DemoQuanTrong.Models
         public string userName { get; set; }
         public string pass_word { get; set; }
         public Nullable<int> role_ { get; set; }
-        public int id1 { get; set; }
-        public string headEmail { get; set; }
-        public string headPhone { get; set; }
-        public string headName { get; set; }
-        public Nullable<System.DateTime> headBirtday { get; set; }
-        public string taxCode { get; set; }
-        public string address_ { get; set; }
-        public Nullable<bool> checkOTP { get; set; }
-        public Nullable<int> active { get; set; }
     }
 }

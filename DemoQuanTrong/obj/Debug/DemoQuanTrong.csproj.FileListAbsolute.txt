@@ -335,7 +335,7 @@ C:\Users\kishu\source\repos\DemoQuanTrongv1\DemoQuanTrong\bin\System.Web.WebPage
 C:\Users\kishu\source\repos\DemoQuanTrongv1\DemoQuanTrong\bin\System.Web.WebPages.Razor.xml
 C:\Users\kishu\source\repos\DemoQuanTrongv1\DemoQuanTrong\bin\Antlr3.Runtime.pdb
 C:\Users\kishu\source\repos\DemoQuanTrongv1\DemoQuanTrong\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\kishu\source\repos\DemoQuanTrongv1\DemoQuanTrong\obj\Debug\DemoQuanTrong.csprojAssemblyReference.cache
 C:\Users\kishu\source\repos\DemoQuanTrongv1\DemoQuanTrong\obj\Debug\DemoQuanTrong.csproj.CopyComplete
 C:\Users\kishu\source\repos\DemoQuanTrongv1\DemoQuanTrong\obj\Debug\DemoQuanTrong.dll
 C:\Users\kishu\source\repos\DemoQuanTrongv1\DemoQuanTrong\obj\Debug\DemoQuanTrong.pdb
-C:\Users\kishu\source\repos\DemoQuanTrongv1\DemoQuanTrong\obj\Debug\DemoQuanTrong.csprojAssemblyReference.cache

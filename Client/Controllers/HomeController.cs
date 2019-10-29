@@ -12,6 +12,7 @@ using System.Web.Security;
 using Newtonsoft.Json;
 using static Client.Service.CustomerService;
 using static Client.Service.LoginService;
+using  static Client.Common.Crypts;
 namespace Client.Controllers
 {
     public class HomeController : Controller
@@ -28,7 +29,7 @@ namespace Client.Controllers
         public ActionResult LogIn()
         {
             var username = Request["UserAccount"];
-            var password = Request["PasswordAccount"];
+            var password = EnCrypt(Request["PasswordAccount"]);
             var person = CheckLogin(username, password);
             if (person != null)
             {
@@ -61,7 +62,7 @@ namespace Client.Controllers
             var accountCus = new AccountCustomer();
             accountCus.customer.headName = Request["Fullname"].Trim();
             accountCus.customer.headEmail = Request["Email"].Trim();
-            accountCus.account.pass_word = Request["Password"];
+            accountCus.account.pass_word = EnCrypt(Request["Password"]);
             accountCus.customer.headPhone = Request["Phone"].Trim();
             accountCus.account.userName = Request["Username"].Trim();
             //accountCus.customer.headBirtday =DateTime.Parse( Request["Birthday"]);

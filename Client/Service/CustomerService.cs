@@ -18,10 +18,10 @@ namespace Client.Service
 
         public static List<Detail> GetAllOrder(Customer customer, int pageNumber)
         {
-            var jsonCustomer=new JavaScriptSerializer().Serialize(customer);
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri("http://localhost:61143/api/customer/getAllOrder/"+jsonCustomer+"/"+pageNumber);
+                client.BaseAddress = new Uri("http://localhost:61143/api/customer/getAllOrder/"+ customer.id+"/"+pageNumber);
+
                 var responseTask = client.GetAsync(client.BaseAddress);
                 responseTask.Wait();
 
@@ -38,18 +38,16 @@ namespace Client.Service
 
         public static int CountAllOrder(Customer customer)
         {
-            var jsonCustomer = JsonConvert.SerializeObject(customer);
             using (var client = new HttpClient())
             {
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                var content = new StringContent(jsonCustomer, Encoding.UTF8, "application/json");
-                var responseTask = client.PostAsync("http://localhost:61143/api/customer/countAllOrder/", content);
+                client.BaseAddress = new Uri("http://localhost:61143/api/customer/countAllOrder/" + customer.id);
+
+                var responseTask = client.GetAsync(client.BaseAddress);
                 responseTask.Wait();
 
                 var result = responseTask.Result;
                 if (result.IsSuccessStatusCode)
                 {
-
                     var readTask = JsonConvert.DeserializeObject<int>(result.Content.ReadAsStringAsync().Result);
                     return readTask; // nếu return ngay đây sao k return lại method trên luôn
                 }

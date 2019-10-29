@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="ExcellonModel1" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+<Schema Namespace="ExcellonModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
   <EntityType Name="Account">
     <Key>
       <PropertyRef Name="id" />
@@ -95,7 +95,7 @@
     <EntitySet Name="Service_" EntityType="Self.Service_" />
     <EntitySet Name="Staffs" EntityType="Self.Staff" />
     <EntitySet Name="Temps" EntityType="Self.Temp" />
-    <FunctionImport Name="checkAccount" ReturnType="Collection(ExcellonModel1.checkAccount_Result)">
+    <FunctionImport Name="checkAccount" ReturnType="Collection(ExcellonModel.checkAccount_Result)">
       <Parameter Name="tableName" Mode="In" Type="String" />
       <Parameter Name="userName" Mode="In" Type="String" />
       <Parameter Name="email" Mode="In" Type="String" />
@@ -107,14 +107,5 @@
     <Property Type="String" Name="userName" Nullable="true" MaxLength="255" />
     <Property Type="String" Name="pass_word" Nullable="true" MaxLength="255" />
     <Property Type="Int32" Name="role_" Nullable="true" />
-    <Property Type="Int32" Name="id1" Nullable="false" />
-    <Property Type="String" Name="headEmail" Nullable="true" MaxLength="255" />
-    <Property Type="String" Name="headPhone" Nullable="true" MaxLength="20" />
-    <Property Type="String" Name="headName" Nullable="true" MaxLength="255" />
-    <Property Type="DateTime" Name="headBirtday" Nullable="true" />
-    <Property Type="String" Name="taxCode" Nullable="true" MaxLength="255" />
-    <Property Type="String" Name="address_" Nullable="true" MaxLength="255" />
-    <Property Type="Boolean" Name="checkOTP" Nullable="true" />
-    <Property Type="Int32" Name="active" Nullable="true" />
   </ComplexType>
 </Schema>

@@ -175,7 +175,7 @@ namespace DemoQuanTrong.Controllers
                     using (var entity = new ExcellonEntities1())
                     {
                         var result = entity.checkAccount(ConstantTable.CUSTOMER, accountCustomer.account.userName, accountCustomer.customer.headEmail);
-                        if (result != null)
+                        if (result.Count() > 0)
                         {
                             accountCustomer.messsage = MessageError.EXIST;
                             return Ok(accountCustomer);
@@ -224,8 +224,8 @@ namespace DemoQuanTrong.Controllers
                 {
                     using (var entity = new ExcellonEntities1())
                     {
-                        var result = entity.checkAccount(ConstantTable.CUSTOMER, accountCustomer.account.userName, accountCustomer.customer.headEmail);
-                        if (result != null)
+                        var result = entity.checkAccount(ConstantTable.CUSTOMER, accountCustomer.account.userName, accountCustomer.customer.headEmail).ToList();
+                        if (result.Count() > 0)
                         {
                             accountCustomer.messsage = MessageError.EXIST;
                             return Ok(accountCustomer);
@@ -258,6 +258,46 @@ namespace DemoQuanTrong.Controllers
 
             return Ok(accountCustomer);
         }
+
+        //[HttpPost]
+        //[Route("registerCustomer/")]
+        //public IHttpActionResult RegisterCustomer([FromBody] AccountCustomer accountCustomer)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return BadRequest(ModelState);
+        //    }
+        //    if (accountCustomer.account != null && accountCustomer.customer != null)
+        //    {
+        //        try
+        //        {
+        //            db.Accounts.Add(accountCustomer.account);
+        //            db.SaveChanges();
+        //            accountCustomer.customer.id = accountCustomer.account.id;
+        //            db.Customers.Add(accountCustomer.customer);
+        //            db.SaveChanges();
+        //            if (accountCustomer.img != null)
+        //            {
+        //                accountCustomer.img.entryId = accountCustomer.account.id;
+        //                accountCustomer.img.entryName = ConstantTable.CUSTOMER;
+        //                db.Imgs.Add(accountCustomer.img);
+        //                db.SaveChanges();
+        //            }
+
+
+        //        }
+        //        catch (Exception e)
+        //        {
+        //            return Json(e.Message);
+        //        }
+
+        //    }
+        //    else
+        //    {
+        //        throw new Exception();
+        //    }
+        //    return Ok(accountCustomer);
+        //}
 
     }
 }

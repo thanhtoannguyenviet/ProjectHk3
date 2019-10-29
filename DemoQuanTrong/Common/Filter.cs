@@ -15,7 +15,7 @@ namespace DemoQuanTrong.Common
         public Filter()
         {
             pageNumber = 0;
-            pageSize = 20;
+            pageSize = 3;
             conditionOrderBy = "id";
             keyword = "";
         }

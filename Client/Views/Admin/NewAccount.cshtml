@@ -3,6 +3,7 @@
 @{
     ViewBag.Title = "Add";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    var Department = Client.Common.ListServices.LsDepartMent;
 }
 <h2>Add</h2>    
 @using (Html.BeginForm())
@@ -51,8 +52,14 @@
     <div class="form-group">
         @Html.LabelFor(model => model.staff.department, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.staff.department, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.staff.department, "", new { @class = "text-danger" })
+            <select data-val="true" data-val-required="The EnumCountry field is required."
+                    id="idCat" name="idCat" onchange="LoadSubCategoryData()">
+                @foreach (string c in Department)
+                {
+                    <option value=@c>@c</option>
+                }
+            </select>
+
         </div>
     </div>
     <div class="form-group">
