@@ -13,11 +13,12 @@ namespace Client
     {
         protected void Application_Start()
         {
+
+           // GlobalFilters.Filters.Add(new AuthorizationFilter());
             AreaRegistration.RegisterAllAreas();
-            FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
-            BundleConfig.RegisterBundles(BundleTable.Bundles);
-            GlobalFilters.Filters.Add(new AuthorizationFilter());
+            BundleConfig.RegisterBundles(BundleTable.Bundles); 
+            FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
         }
     }
 }

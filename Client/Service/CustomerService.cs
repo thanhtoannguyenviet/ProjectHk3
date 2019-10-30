@@ -183,5 +183,11 @@ namespace Client.Service
             return null;
         }
         #endregion
+
+        #region Imgage
+
+        public static Img UpdateImg(Img img) => StaffService.UpdateImg(img);
+
+        #endregion
     }
 }

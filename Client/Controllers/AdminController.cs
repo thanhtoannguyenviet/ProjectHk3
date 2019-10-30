@@ -18,11 +18,12 @@ namespace Client.Controllers
     public class AdminController : Controller
     {
         // GET: Admin
-        [Authorize(Roles = "Admin,HR,Trainer,NhanVien")]
+
+        [Authorize(Roles = "Admin")]
         public ActionResult Index() => View();
 
 
-        [Authorize(Roles = "Admin,HR")]
+        [Authorize(Roles = "Admin")]
         public ActionResult Account()
         {
            return View();
@@ -58,7 +59,6 @@ namespace Client.Controllers
         [Authorize(Roles = "Admin,HR,Trainer,NhanVien")]
         public ActionResult SettingView(AccountStaff accountStaff)
         {
-
             var newaccountStaff = UpdateStaff(accountStaff);
             if (newaccountStaff != null) {
                 return SettingView();
@@ -66,28 +66,27 @@ namespace Client.Controllers
             return Index();
 
         }
+
         [HttpPost]
-        public ActionResult Img()
+        public ActionResult Img(HttpPostedFileBase ImageFile)
         {
             AccountStaff accountStaff = Session["Account"] as AccountStaff;
-           string imgpath= Request["ImageFile"];
-            string fileName = Path.GetFileNameWithoutExtension(imgpath);
-            string extension = Path.GetExtension(imgpath);
-            fileName = fileName + DateTime.Now.ToString("yymmssffff") + extension;
-            //Img img = new Img();
-            //img.path_ ="~/Images/"+ fileName;
-            //img.entryId = accountStaff.staff.id;
-            accountStaff.imgs[0].path_ = "~/Images/" + fileName;
-            var img =UpdateImg(accountStaff.imgs[0]);
-            if (img != null)
+            if (ImageFile.ContentLength > 0)
             {
-                accountStaff.imgs[0] = img;
-                Session["Account"] = accountStaff;
-                ViewBag.UpdateSuccess = 1;
-                return Account();
+                var fileName = Path.GetFileName(ImageFile.FileName);
+                var path = Path.Combine(Server.MapPath("~/Images"), fileName);
+                ImageFile.SaveAs(path);
+                accountStaff.imgs[0].path_ = "~/Images/" + fileName;
+                var img = UpdateImg(accountStaff.imgs[0]);
+                if (img != null)
+                {
+                    accountStaff.imgs[0] = img;
+                    Session["Account"] = accountStaff;
+                    ViewBag.UpdateSuccess = 1;
+                    return View("Index");
+                }
             }
             return SettingView();
         }
     }
-
 }

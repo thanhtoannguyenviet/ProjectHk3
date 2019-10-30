@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -13,10 +14,11 @@ namespace Client.Controllers
     public class CustomerController : Controller
     {
         // GET: Customer
+
+        [Authorize(Roles = "Customer")]
         public ActionResult Index()
         {
-            int pageNummber = CountStaffCustomer()/3;
-            ViewBag.Count = pageNummber;
+            ViewBag.Count = CountStaffCustomer() / 3;
             return View(GetStaffCustomer(0));
         }
 
@@ -24,7 +26,7 @@ namespace Client.Controllers
         {
             return PartialView("_StaffCanHire", GetStaffCustomer(id));
         }
-
+        [Authorize(Roles = "Customer")]
         public ActionResult Order()
         {
             var session = Session["Account"]  as AccountCustomer;
@@ -60,6 +62,45 @@ namespace Client.Controllers
             ViewBag.Count = CountPayment(customer);
             return View(GetPayment(customer, id));
         }
+
+        public ActionResult SettingView()
+        {
+            AccountCustomer accountCustomer = Session["Account"] as AccountCustomer;
+            
+            return View(accountCustomer);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult SettingView(AccountCustomer accountCustomer)
+        {
+            var newAccountCustomer = UpdateCustomer(accountCustomer);
+            if (newAccountCustomer != null)
+            {
+                return Index();
+            }
+            return View(accountCustomer);
+        }
         //detailStaff
+        [HttpPost]
+        public ActionResult Img(HttpPostedFileBase ImageFile)
+        {
+            AccountCustomer accountCustomer = Session["Account"] as AccountCustomer;
+            if (ImageFile.ContentLength > 0) {
+                var fileName = Path.GetFileName(ImageFile.FileName);
+                var path = Path.Combine(Server.MapPath("~/Images"), fileName);
+                ImageFile.SaveAs(path);
+            accountCustomer.img.path_ = "~/Images/" + fileName;
+            var img = UpdateImg(accountCustomer.img);
+            if (img != null)    
+            {
+                accountCustomer.img = img;
+                Session["Account"] = accountCustomer;
+                ViewBag.Count = CountStaffCustomer() / 3;
+                ViewBag.UpdateSuccess = 1;
+                return View("Index",GetStaffCustomer(0));
+            }
+            }
+            return SettingView();
+        }
     }
 }

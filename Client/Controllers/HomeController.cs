@@ -15,30 +15,38 @@ using static Client.Service.LoginService;
 using  static Client.Common.Crypts;
 namespace Client.Controllers
 {
+    [AllowAnonymous]
     public class HomeController : Controller
     {
         [HttpGet]
-        [AllowAnonymous]
         public ActionResult Index()
         {
+          if(Session["Account"]==null&& FormsAuthentication.IsEnabled == true) { 
+            FormsAuthentication.SignOut();
             return View(new Account());
+          }
+          else if (Session["Account"] as AccountStaff != null)
+          {
+              return Redirect("/Admin/");
+          }
+          else return Redirect("/Customer/");
         }
         [HttpPost]
-        [AllowAnonymous]
-        [ValidateAntiForgeryToken]
         public ActionResult LogIn()
         {
-            var username = Request["UserAccount"];
+            var usernames = Request["UserAccount"];
             var password = EnCrypt(Request["PasswordAccount"]);
-            var person = CheckLogin(username, password);
+            var person = CheckLogin(usernames, password);
             if (person != null)
             {
-                FormsAuthentication.SetAuthCookie(Common.Role.GetValue(person.role_),true);
+
                 if (person.role_ == 1)
                 {
                     var customer = LoginCustomer(person);
                     Session["Account"] = customer;
                     ViewBag.Name = customer.customer.headName;
+                    var username = Common.Role.GetValue(person.role_);
+                    FormsAuthentication.SetAuthCookie(Common.Role.GetValue(person.role_), true);
                     return Redirect("/Customer/");
                 }
                 else if (person.role_ > 1)

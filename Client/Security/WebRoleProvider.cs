@@ -16,11 +16,7 @@ namespace Client.Security
         public override string[] GetRolesForUser(string username)
         {
             List<string> arr = new List<string>();
-            var stringArray = Client.Common.Role.ROLE_;
-            foreach (var item in stringArray)
-            {
-                arr.Add(item.Value);
-            }
+            arr.Add(username);
             return arr.ToArray();
         }
 

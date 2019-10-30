@@ -3,26 +3,30 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
-<script src="~/Scripts/jquery.validate.unobtrusive.js" type="text/javascript">
-</script>
+@if (ViewBag.UpdateSuccess != null)
+{
+    <script type="text/javascript">
+        alert("Update Success")
+    </script>
+}
 <h2>Index</h2>
 <div class="modal-content">
     <div class="w3-row-padding" id="Content">
-        @Html.Partial("_StaffCanHire",Model);
+        @Html.Partial("_StaffCanHire", Model);
     </div>
 </div>
 <div class="w3-center w3-padding-32">
-  
-        <div class="w3-bar">
-            @for (int i = 0; i <= ViewBag.Count; i++)
+
+    <div class="w3-bar">
+        @for (int i = 0; i <= ViewBag.Count; i++)
+        {
+            @Ajax.ActionLink("" + (i + 1), "StaffCanHire", "Customer", new { id = i }, new AjaxOptions
             {
-                @Ajax.ActionLink(""+(i+1), "StaffCanHire","Customer",new {id=i},new AjaxOptions
-                {
-                    HttpMethod="GET",
-                    InsertionMode = InsertionMode.Replace,
-                    UpdateTargetId = "Content"
-                })
-            }
-        </div>
+                HttpMethod = "GET",
+                InsertionMode = InsertionMode.Replace,
+                UpdateTargetId = "Content"
+            })
+        }
+    </div>
 </div>
 
