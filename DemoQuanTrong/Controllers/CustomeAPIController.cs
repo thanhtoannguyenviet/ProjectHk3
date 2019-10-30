@@ -16,7 +16,7 @@ namespace DemoQuanTrong.Controllers
     [RoutePrefix("api/customer")]
     public class CustomerAPIController : ApiController
     {
-        private ExcellonEntities1 db = new ExcellonEntities1();
+        private ExcellonEntities db = new ExcellonEntities();
         [HttpGet]
         [Route("getAllOrder/{id}/{page}")]
         public IHttpActionResult getAllOrder(string id, int page)
@@ -25,7 +25,7 @@ namespace DemoQuanTrong.Controllers
             Filter filter = new Filter();
             filter.pageNumber = page;
             string query = CustomSQL.findForCustomer(ConstantTable.DETAIL, id, filter);
-            using (var entities = new ExcellonEntities1())
+            using (var entities = new ExcellonEntities())
             {
                 var details = entities.Details
                         .SqlQuery(query)
@@ -44,7 +44,7 @@ namespace DemoQuanTrong.Controllers
         {
 
             string query = CustomSQL.findForCustomer(ConstantTable.DETAIL, id, null, true);
-            using (var entities = new ExcellonEntities1())
+            using (var entities = new ExcellonEntities())
             {
                 int countOrder = entities.Details
                         .SqlQuery(query).Count();
@@ -60,7 +60,7 @@ namespace DemoQuanTrong.Controllers
             Filter filter = new Filter();
             filter.pageNumber = page;
             string query = CustomSQL.findForCustomer(ConstantTable.PAYMENT, id, filter);
-            using (var entities = new ExcellonEntities1())
+            using (var entities = new ExcellonEntities())
             {
                 var payments = entities.Payments
                         .SqlQuery(query)
@@ -79,7 +79,7 @@ namespace DemoQuanTrong.Controllers
         {
 
             string query = CustomSQL.findForCustomer(ConstantTable.PAYMENT, id, null, true);
-            using (var entities = new ExcellonEntities1())
+            using (var entities = new ExcellonEntities())
             {
                 int countPayment = entities.Payments
                         .SqlQuery(query).Count();
@@ -88,14 +88,14 @@ namespace DemoQuanTrong.Controllers
         }
 
         [HttpGet]
-        [Route("getStaffCustomer/{page}")]
+        [Route("getStaffCustomer/{page}/")]
         public IHttpActionResult getStaff(int page)
         {
             Filter filter = new Filter();
             filter.pageNumber = page;
             string query = CustomSQL.getStaffForCustomer(filter);
             List<AccountStaff> staffListCus = new List<AccountStaff>();
-            using (var entities = new ExcellonEntities1())
+            using (var entities = new ExcellonEntities())
             {
                 var staffList = entities.Staffs
                         .SqlQuery(query)
@@ -126,7 +126,7 @@ namespace DemoQuanTrong.Controllers
         public IHttpActionResult countStaff()
         {
             string query = CustomSQL.getStaffForCustomer(null, true);
-            using (var entities = new ExcellonEntities1())
+            using (var entities = new ExcellonEntities())
             {
                 int count = entities.Staffs
                         .SqlQuery(query).Count();
@@ -140,7 +140,7 @@ namespace DemoQuanTrong.Controllers
         {
             AccountStaff accountStaff = new AccountStaff();
             string query = CustomSQL.findStaff(null, id);
-            using (var entities = new ExcellonEntities1())
+            using (var entities = new ExcellonEntities())
             {
                 var staff = entities.Staffs
                         .SqlQuery(query)
@@ -172,9 +172,9 @@ namespace DemoQuanTrong.Controllers
             {
                 try
                 {
-                    using (var entity = new ExcellonEntities1())
+                    using (var entity = new ExcellonEntities())
                     {
-                        var result = entity.checkAccount(ConstantTable.CUSTOMER, accountCustomer.account.userName, accountCustomer.customer.headEmail);
+                        var result = entity.checkAccount(ConstantTable.CUSTOMER, accountCustomer.account.userName, accountCustomer.customer.headEmail, 0);
                         if (result.Count() > 0)
                         {
                             accountCustomer.messsage = MessageError.EXIST;
@@ -222,9 +222,9 @@ namespace DemoQuanTrong.Controllers
             {
                 if (accountCustomer.account != null && accountCustomer.customer != null)
                 {
-                    using (var entity = new ExcellonEntities1())
+                    using (var entity = new ExcellonEntities())
                     {
-                        var result = entity.checkAccount(ConstantTable.CUSTOMER, accountCustomer.account.userName, accountCustomer.customer.headEmail).ToList();
+                        var result = entity.checkAccount(ConstantTable.CUSTOMER, accountCustomer.account.userName, accountCustomer.customer.headEmail, accountCustomer.account.id).ToList();
                         if (result.Count() > 0)
                         {
                             accountCustomer.messsage = MessageError.EXIST;

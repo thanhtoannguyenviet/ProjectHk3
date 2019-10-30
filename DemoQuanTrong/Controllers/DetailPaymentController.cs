@@ -13,7 +13,7 @@ namespace DemoQuanTrong.Controllers
     [RoutePrefix("api/payment")]
     public class DetailPaymentController : ApiController
     {
-        private ExcellonEntities1 db = new ExcellonEntities1();
+        private ExcellonEntities db = new ExcellonEntities();
         [HttpPost]
         [Route("createOrder/")]
         public IHttpActionResult createOrder([FromBody] DetailPayment detailPayment)

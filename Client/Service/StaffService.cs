@@ -7,12 +7,35 @@ using System.Net.Http;
 using System.Text;
 using System.Web;
 using System.Web.Script.Serialization;
+using Newtonsoft.Json;
 
 namespace Client.Service
 {
     public class StaffService
     {
         #region Staff
+
+        public static List<AccountStaff> FindWithRole(int? id)
+        {
+
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("http://localhost:61143/api/staff/findWithRole/" + id);
+                //HTTP GET
+                var responseTask = client.GetAsync(client.BaseAddress);
+                responseTask.Wait();
+                var result = responseTask.Result;
+                if (result.IsSuccessStatusCode)
+                {
+                    var readTask = JsonConvert.DeserializeObject<List<AccountStaff>>(result.Content.ReadAsStringAsync().Result);
+                    //ngay chỗ này nó trả về đối tượng trong store
+                    // là cái class getCustomerForDetail_Result. e tạo lại đối tượng tương đương ngoài đây để hứng
+                    return readTask;
+                }
+            }
+            return null;
+
+        }
         public static AccountStaff RegisterStaff(AccountStaff accountStaff)
         {
             using (HttpClient client = new HttpClient())

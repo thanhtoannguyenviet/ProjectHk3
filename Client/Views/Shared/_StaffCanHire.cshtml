@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<Client.Models.AccountStaff>
 
-@foreach (var item in Model){
+@if(Model!=null){foreach (var item in Model){
             <div class="w3-col m4 w3-margin-bottom">
                 <div class="w3-light-grey">
                     <img src="@Url.Content(item.imgs[0].path_)" alt="John" style="width: 100%">
@@ -16,22 +16,81 @@
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Success!</h5>
+                                        <!-- Huy UPD STT -->
+                                        <!-- <h5 class="modal-title" id="exampleModalLabel">Success!</h5> -->
+                                        <h5 class="modal-title" id="exampleModalLabel">Choose date hiring!</h5>
+                                        <!-- Huy UPD END -->
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        We send your Request to Tâm Tâm. She will answer you soon.
-                                        Have a nice day!
+                                        <!-- Huy UPD STT -->
+                                        <!--We send your Request to Tâm Tâm. She will answer you soon.-->
+                                        <!--Have a nice day!-->
+                                        <script type="text/javascript">
+                                                function changeDateFormat() {
+                                                    var dateStt = new Date(document.getElementById("inpDateStt").value);
+                                                    var dateEnd = new Date(document.getElementById("inpDateEnd").value);
+                                                    var Difference_In_Time = dateEnd.getTime() - dateStt.getTime();
+                                                    var Difference_In_Days = (Difference_In_Time / (1000 * 3600 * 24)) + 1;
+                                                    if (!isNaN(Difference_In_Days)) {
+                                                        document.getElementById("Difference_In_Days").innerHTML = Difference_In_Days;
+                                                        document.getElementById("subTotal").innerHTML = Difference_In_Days * 10;
+                                                    }
+                                                }
+                                                function addToCart() {
+                                                    var dateStt = new Date(document.getElementById("inpDateStt").value);
+                                                    var dateEnd = new Date(document.getElementById("inpDateEnd").value);
+                                                    if (dateStt > dateEnd) {
+                                                        alert("Date end must be equal or greater than date start");
+                                                    } else {
+                                                        location.href = '/Payment/AddToCart?staffId=' + '1' + '&dateSTT=' + document.getElementById("inpDateStt").value +
+                                                            '&dateEND=' + document.getElementById("inpDateEnd").value +
+                                                            '&amountMoney=' + document.getElementById("subTotal").textContent;
+                                                    }
+                                                }
+                                        </script>
+                                        <div class="float-left">
+                                            <p>Start day:</p>
+                                            <input type="date" id="inpDateStt" onchange="changeDateFormat()" value="@DateTime.Now.ToString("yyyy-MM-dd")" />
+                                            <br />
+                                            <p>End day:</p>
+                                            <input type="date" id="inpDateEnd" onchange="changeDateFormat()" value="@DateTime.Now.ToString("yyyy-MM-dd")" />
+                                        </div>
+                                        <div class="float-right">
+                                            <table>
+                                                <tr>
+                                                    <td>Price:</td>
+                                                    <td>10</td>
+                                                    <td>USD</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Day hiring:</td>
+                                                    <td id="Difference_In_Days">1</td>
+                                                    <td>Days</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Total:</td>
+                                                    <td id="subTotal">10</td>
+                                                    <td>USD</td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                        <!-- Huy UPD END -->
                                     </div>
                                     <div class="modal-footer">
+                                        <!-- Huy ADD STT -->
+                                        <button type="button" class="btn btn-primary" onclick="addToCart()">Add To Cart</button>
+                                        <!-- Huy ADD END -->
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
+
                     </div>
                 </div>
             </div>
         }
+}

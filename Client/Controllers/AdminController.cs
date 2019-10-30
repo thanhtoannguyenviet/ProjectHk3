@@ -10,7 +10,9 @@ using System.Web.Script.Serialization;
 using Client.Models;
 using System.Net.Http;
 using System.Threading.Tasks;
+using static Client.Service.LoginService;
 using static Client.Service.StaffService;
+using static Client.Service.PaymentService;
 using static Client.Common.Crypts;
 namespace Client.Controllers
 {
@@ -19,17 +21,45 @@ namespace Client.Controllers
     {
         // GET: Admin
 
-        [Authorize(Roles = "Admin")]
-        public ActionResult Index() => View();
-
+        [Authorize(Roles = "Admin,HR,Trainer,NhanVien")]
+        public ActionResult Index()
+        {
+            var accountStaff = Session["Account"] as AccountStaff;
+            // ngay đây đối tượng trả về là getCustomerForDetail_Result
+            //chưa truyền vào id staff dc (id = 0)
+            ViewBag.Model = GetDetailForStaff(accountStaff.staff.id);
+            return View(accountStaff.details);
+        }
+        
 
         [Authorize(Roles = "Admin")]
         public ActionResult Account()
         {
-           return View();
+            var accountStaff = Session["Account"] as AccountStaff;
+            return View(FindWithRole(accountStaff.account.role_));
         }
-        
-        
+
+        public ActionResult AcceptReplyCustomer(int detail)
+        {
+            var accountSaff = Session["Account"] as AccountStaff;
+            var update=accountSaff.details.Find(s => s.id == detail);
+            update.statusOrder = 1;
+            var updateDetail = UpdateDetail(update);
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult BanAccount(int id)
+        {
+
+        }
+        public ActionResult DenyReplyCustomer(int detail)
+        {
+            var accountSaff = Session["Account"] as AccountStaff;
+            var update = accountSaff.details.Find(s => s.id == detail);
+            update.statusOrder = -1;
+            var updateDetail = UpdateDetail(update);
+            return RedirectToAction("Index");
+        }
         [Authorize(Roles = "Admin,HR")]
         public ActionResult NewAccount()
         {
@@ -61,12 +91,28 @@ namespace Client.Controllers
         {
             var newaccountStaff = UpdateStaff(accountStaff);
             if (newaccountStaff != null) {
-                return SettingView();
+                return RedirectToAction("Index");
             }
-            return Index();
-
+            return SettingView();
         }
 
+        [HttpPost]
+        public ActionResult ChangePassword(string password)
+        {
+            AccountStaff accountStaff = Session["Account"] as AccountStaff;
+            if (accountStaff.account.pass_word == Request["Oldpassword"] && password == Request["ConfPassword"])
+            {
+                accountStaff.account.pass_word = password;
+                var newaccountStaff = UpdateStaff(accountStaff);
+                if (newaccountStaff != null)
+                {
+                    ViewBag.Success = 1;
+                    return RedirectToAction("Index");
+                }
+            }
+            ViewBag.Error=1
+            return SettingView();
+        }
         [HttpPost]
         public ActionResult Img(HttpPostedFileBase ImageFile)
         {

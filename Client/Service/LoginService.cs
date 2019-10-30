@@ -74,5 +74,26 @@ namespace Client.Service
             }
             return null;
         }
+
+        public static List<getCustomerForDetail_Result> GetDetailForStaff(int id)
+        {
+
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("http://localhost:61143/api/account/getDetailForStaff/"+id);
+                //HTTP GET
+                var responseTask = client.GetAsync(client.BaseAddress);
+                responseTask.Wait();
+                var result = responseTask.Result;
+                if (result.IsSuccessStatusCode)
+                {
+                    var readTask = JsonConvert.DeserializeObject<List<getCustomerForDetail_Result>>(result.Content.ReadAsStringAsync().Result);
+                    //ngay chỗ này nó trả về đối tượng trong store
+                    // là cái class getCustomerForDetail_Result. e tạo lại đối tượng tương đương ngoài đây để hứng
+                    return readTask;
+                }
+            }
+            return null;
+        } 
     }
 }

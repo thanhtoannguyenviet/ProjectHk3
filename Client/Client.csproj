@@ -60,6 +60,9 @@
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="PayPal, Version=1.9.1.0, Culture=neutral, PublicKeyToken=5b4afc1ccaef40fb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PayPal.1.9.1\lib\net451\PayPal.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -131,6 +134,7 @@
     <Compile Include="Common\ListServices.cs" />
     <Compile Include="Common\Role.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\ClientController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
@@ -140,10 +144,14 @@
     <Compile Include="Models\AccountCustomer.cs" />
     <Compile Include="Models\AccountModel.cs" />
     <Compile Include="Models\AccountStaff.cs" />
+    <Compile Include="Models\Common.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\Detail.cs" />
+    <Compile Include="Models\DetailPayment.cs" />
+    <Compile Include="Models\getCustomerForDetail_Result.cs" />
     <Compile Include="Models\Img.cs" />
     <Compile Include="Models\Payment.cs" />
+    <Compile Include="Models\PaypalConfiguration.cs" />
     <Compile Include="Models\Service_.cs" />
     <Compile Include="Models\Staff.cs" />
     <Compile Include="Models\Temp.cs" />
@@ -151,6 +159,7 @@
     <Compile Include="Security\WebRoleProvider.cs" />
     <Compile Include="Service\CustomerService.cs" />
     <Compile Include="Service\LoginService.cs" />
+    <Compile Include="Service\PaymentService.cs" />
     <Compile Include="Service\StaffService.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -226,7 +235,6 @@
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Admin\Account.cshtml" />
-    <Content Include="Views\Admin\Add.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Admin\NewAccount.cshtml" />
     <Content Include="Views\Admin\SettingView.cshtml" />
@@ -249,6 +257,7 @@
     <Content Include="Views\Shared\_AllOrder.cshtml" />
     <Content Include="Views\Customer\View.cshtml" />
     <Content Include="Views\Customer\SettingView.cshtml" />
+    <Content Include="Views\Shared\_PaymentList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

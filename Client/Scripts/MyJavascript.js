@@ -1,8 +1,10 @@
 ﻿function signin() {
+    document.getElementById('resigter').style.display = 'none';
     var open = document.getElementById('signin');
     open.style.display = 'block';
 }
 function resigter() {
+    document.getElementById('signin').style.display = 'none';
     var open = document.getElementById('resigter');
     open.style.display = 'block';
 }
@@ -66,5 +68,28 @@ function changeImage(input) {
     }
     else {
         $('#Image').attr('src', '/Image/jpg.png');
+    }
+}
+function CheckInfo(element, type) {
+    var regexp;
+    var message;
+    switch (type) {
+    case "phone":
+         regexp = /^[0-9]$/;
+         message = 'Please Enter Number Only';
+         break;
+    case "Confpassword":
+         regexp = $('#Confpassword').val;
+            if (regexp == element.val()) {
+                message = 'Please Enter Number Only';
+            }
+            break;
+    default :
+    }
+    if (message != null) {
+        element.placeholder = message;
+        element.classList.add('border border-dangerous');
+    } else {
+        element.classList.add('border border-success');
     }
 }

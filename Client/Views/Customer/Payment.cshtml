@@ -1,1 +1,58 @@
-﻿
+﻿@using Client.Models
+@model List<Client.Models.Detail>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    decimal sum = 0;
+    int count = 0;
+}
+<script type="text/javascript">
+    function reCal(count) {
+        var dateStt = new Date(document.getElementById("dateSTT" + count).value);
+        var dateEnd = new Date(document.getElementById("dateEND" + count).value);
+        var Difference_In_Time = dateEnd.getTime() - dateStt.getTime();
+        var Difference_In_Days = (Difference_In_Time / (1000 * 3600 * 24)) + 1;
+        document.getElementById("numOfDays" + count).innerHTML = Difference_In_Days;
+        document.getElementById("subTotal" + count).innerHTML = Difference_In_Days * 10;
+
+        // re-sum
+        var reSum = 0;
+        for (i = 1; i <= document.getElementsByClassName("subTotal").length; i++) {
+            reSum += Number(document.getElementById("subTotal" + i).textContent);
+        }
+        document.getElementById("total").innerHTML = reSum + " USD";
+    }
+    function removeFromCart(count) {
+        location.href = '/Payment/RemoveFromCart?index=' + count;
+    }
+</script>
+<h2>Payment Details</h2>
+<table style="margin-left:auto;margin-right:auto;width:80%;">
+    <tr style="height:50px">
+        <th style="border:2px solid black; border-collapse: collapse; text-align:center">Staff Id</th>
+        <th style="border:2px solid black; border-collapse: collapse; text-align:center">Date Start</th>
+        <th style="border:2px solid black; border-collapse: collapse; text-align:center">Date End</th>
+        <th style="border:2px solid black; border-collapse: collapse; text-align:center">Number Of Days</th>
+        <th style="border:2px solid black; border-collapse: collapse; text-align:center">Sub Total</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        count++;
+        sum = sum + item.amountMoney.Value;
+        <tr>
+            <td>@Html.Label("staffId", item.staffId)</td>
+            <td>@Html.TextBox("dateSTT" + count, item.startDate.Value.ToString("yyyy-MM-dd"), new { type = "date", onchange = "reCal(" + count + ")" })</td>
+            <td>@Html.TextBox("dateEND" + count, item.endDate.Value.ToString("yyyy-MM-dd"), new { type = "date", onchange = "reCal(" + count + ")" })</td>
+            <td>@Html.Label("numOfDays", ((item.endDate.Value - item.startDate.Value).TotalDays + 1).ToString(), new { type = "number", id = "numOfDays" + count })</td>
+            <td>@Html.Label("subTotal", item.amountMoney.ToString(), new { type = "number", id = "subTotal" + count, @class = "subTotal" })</td>
+            <td><button type="button" onclick="removeFromCart(@count)"><i class="fa fa-window-close" aria-hidden="true"></i></button></td>
+        </tr>
+    }
+    <tr>
+        <th colspan="4">Total</th>
+        <th id="total">@sum USD</th>
+    </tr>
+    <tr>
+        <td colspan="6" align="right"><button type="submit" style="width:5%" onclick="location.href = '/Payment/Pay'">Pay</button></td>
+    </tr>
+</table>

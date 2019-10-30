@@ -54,14 +54,11 @@ namespace DemoQuanTrong.Common
             }
             else
             {
-
-
                 query += " ORDER BY " + filter.conditionOrderBy;
                 if (!filter.orderBy)
                 {
                     query += " DESC ";
                 }
-
                 pageNumber = filter.pageNumber;
                 pageSize = filter.pageSize;
                 int getRow = pageNumber * pageSize;
@@ -143,7 +140,7 @@ namespace DemoQuanTrong.Common
             {
                 query = CustomSQL.pagination(query, filter);
             }
-            return clear(query); ;
+            return clear(query);
         }
 
         public static string findStaff(Filter filter = null, int id = 0)
@@ -159,7 +156,7 @@ namespace DemoQuanTrong.Common
                 query = CustomSQL.SQLWhere(query, "id", id + "");
             }
             query = CustomSQL.pagination(query, filter);
-            return clear(query); ;
+            return clear(query);
         }
 
         public static string checkLogin(string userName, string password)
@@ -167,14 +164,14 @@ namespace DemoQuanTrong.Common
             string query = CustomSQL.QuerySelect(ConstantTable.ACCOUNT);
             query = CustomSQL.SQLWhere(query, "userName", userName, true);
             query = CustomSQL.SQLWhere(query, "pass_word", password, true);
-            return clear(query); ;
+            return clear(query);
         }
         public static string checkRole(string tableName, string id)
         {
             string query = "";
             query = CustomSQL.QuerySelect(tableName);
             query = CustomSQL.SQLWhere(query, "id", id);
-            return clear(query); ;
+            return clear(query);
         }
 
         public static string getImg(string entryName, string entryId)
@@ -182,7 +179,7 @@ namespace DemoQuanTrong.Common
             string query = CustomSQL.QuerySelect(ConstantTable.IMG);
             query = CustomSQL.SQLWhere(query, "entryName", entryName, true);
             query = CustomSQL.SQLWhere(query, "entryId", entryId);
-            return clear(query); ;
+            return clear(query);
         }
 
         public static string findForCustomer(string tableName, string id, Filter filter, Boolean count = false)
@@ -193,15 +190,63 @@ namespace DemoQuanTrong.Common
             {
                 query = CustomSQL.pagination(query, filter);
             }
-            return clear(query); ;
+            return clear(query);
         }
 
         public static string getService(int id)
         {
             string query = CustomSQL.QuerySelect(ConstantTable.SERVICE);
             query = CustomSQL.SQLWhere(query, "staffId", id + "");
-            return clear(query); ;
+            return clear(query);
         }
 
+        public static string getStaffWithRole(string role, Filter filter, bool count = false)
+        {
+            string query = CustomSQL.QuerySelect(ConstantTable.STAFF);
+            query += " INNER JOIN Account B ON A.id = B.id ";
+            query = CustomSQL.SQLLessWhere(query, "role_", role);
+            if (!count)
+            {
+                query = CustomSQL.pagination(query, filter);
+            }
+            return clear(query);
+        }
+
+        public static string getStaffWithKeyword(string role, Filter filter, bool count = false)
+        {
+            string query = CustomSQL.QuerySelect(ConstantTable.STAFF);
+            query += " INNER JOIN Account B ON A.id = B.id ";
+            query = CustomSQL.SQLLessWhere(query, "role_", role);
+            query = CustomSQL.SQLSearch(query, filter.keyword, "staffName");
+            if (!count)
+            {
+                query = CustomSQL.pagination(query, filter);
+            }
+            return clear(query);
+        }
+
+        public static string getDetailPendingStaff(string idStaff, Filter filter = null)
+        {
+            string query = CustomSQL.QuerySelect(ConstantTable.DETAIL);
+            query = CustomSQL.SQLWhere(query, "staffId", idStaff);
+            query = CustomSQL.SQLWhere(query, "statusOrder", 0 + "");
+            return clear(query);
+        }
+
+        public static string getPaymentForCus(string idCus, Filter filter = null)
+        {
+            string query = CustomSQL.QuerySelect(ConstantTable.PAYMENT);
+            query = CustomSQL.SQLWhere(query, "customerId", idCus);
+            return clear(query);
+        }
+
+        public static string getDetail(string idPayment, Filter filter = null)
+        {
+            string query = CustomSQL.QuerySelect(ConstantTable.DETAIL);
+            query = CustomSQL.SQLWhere(query, "paymentId", idPayment);
+            return clear(query);
+        }
     }
+
+
 }

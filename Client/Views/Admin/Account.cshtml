@@ -1,4 +1,4 @@
-﻿
+﻿@model IEnumerable<Client.Models.AccountStaff>
 @{
     ViewBag.Title = "Home Page";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
@@ -24,91 +24,27 @@
         </tr>
         </thead>
         <tbody class="accordion" id="accordionExample">
-        <tr>
-            <td>1</td>
-            <td>Nhan Vien A</td>
-            <td>012345632</td>
-            <td>tivilcd@gmail.com</td>
-            <td>10/05/1990</td>
-            <td>0</td>
-            <td>225147887</td>
-            <td>
-                <a class="text-primary" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                    Detail
-                </a>
-            </td>
-        </tr>
-
-        <tr id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
-            <td colspan="8">
-                <table>
-                    <thead>
-                    <tr class="bg-primary">
-                        <th>No.</th>
-                        <th>Name Customer</th>
-                        <th>Phone number</th>
-                        <th>Email</th>
-                        <th>Start</th>
-                        <th>End</th>
-                        <th>Earn</th>
-                        <th>Status</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Truong Van B</td>
-                        <td>012345688</td>
-                        <td>tvb@gmail.com</td>
-                        <td>10/17/2019</td>
-                        <td>10/20/2019</td>
-                        <td>$7000</td>
-                        <td class="bg-success"><a href="#" class=" text-light">Done</a></td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Truong Van B</td>
-                        <td>012345688</td>
-                        <td>tvb@gmail.com</td>
-                        <td>10/17/2019</td>
-                        <td>10/20/2019</td>
-                        <td>$7000</td>
-                        <td class="bg-danger"><a href="#" class=" text-light">Reject</a></td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Truong Van B</td>
-                        <td>012345688</td>
-                        <td>tvb@gmail.com</td>
-                        <td>10/17/2019</td>
-                        <td>10/20/2019</td>
-                        <td>$7000</td>
-                        <td class="bg-warning"><a href="#" class=" text-light">Pending</a></td>
-                    </tr>
-                    </tbody>
-                </table>
-            </td>
-        </tr>
-        <tr>
-            <td>2</td>
-            <td>Truong Van B</td>
-            <td>012345688</td>
-            <td>tvb@gmail.com</td>
-            <td>10/17/2019</td>
-            <td>10/20/2019</td>
-            <td>$7000</td>
-            <td><a href="#" class="text-primary">Detail</a></td>
-        </tr>
-        <tr>
-            <td>3</td>
-            <td>Tran Van C</td>
-            <td>012348862</td>
-            <td>cuongpro123@gmail.com</td>
-            <td>10/17/2019</td>
-            <td>10/19/2019</td>
-            <td>$7000</td>
-            <td>    <a href="#" class="text-primary">Detail</a></td>
-        </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.staff.id</td>
+                    <td>@item.staff.staffName</td>
+                    <td>@item.staff.staffPhone</td>
+                    <td>@item.staff.staffEmail</td>
+                    <td>@item.staff.staffBirtday</td>
+                    <td>@item.staff.mistakeCount</td>
+                    <td>@item.staff.bankCard</td>
+                    <td>
+                       @Ajax.ActionLink("BAN","BanAccount",new { id = item.staff.id }, new AjaxOptions
+                       {
+                           HttpMethod = "GET",
+                           InsertionMode = InsertionMode.Replace,
+                           UpdateTargetId = "Content"
+                       }))
+                    </td>
+                </tr>
+            }
+            
         </tbody>
     </table>
 </div>

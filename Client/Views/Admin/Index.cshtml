@@ -1,12 +1,14 @@
-﻿
+﻿@using Client.Models
+@model IEnumerable<Client.Models.Detail>
 @{
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    var infoCustomer = ViewBag.Model as List<getCustomerForDetail_Result>;
 }
 
 <header class="w3-container" style="padding-top:22px">
     <h5><b><i class="fa fa-dashboard"></i> My Dashboard</b></h5>
 </header>
-@if (ViewBag.UpdateSuccess!=null)
+@if (ViewBag.UpdateSuccess != null)
 {
     <script type="text/javascript">
         alert("Update Success")
@@ -61,8 +63,8 @@
             <thead>
                 <tr class="table-secondary">
                     <th>No.</th>
-                    <th>Name Customer</th>
-                    <th>Phone number</th>
+                    <th style="width:20%">Name</th>
+                    <th>Phone</th>
                     <th>Email</th>
                     <th>Start</th>
                     <th>End</th>
@@ -71,62 +73,46 @@
                 </tr>
             </thead>
             <tbody>
+            @foreach (var item in Model)
+            {
                 <tr>
-                    <td>1</td>
-                    <td>Lam Van A</td>
-                    <td>012345678</td>
-                    <td>lva1234@gmail.com</td>
-                    <td>11/01/2019</td>
-                    <td>11/02/2019</td>
-                    <td>$7000</td>
-                    <td>
-                        <a class="text-primary" data-toggle="modal" data-target="#exampleModal">
-                            pending
-                        </a>
-                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Success!</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        We send your Request to Tâm Tâm. She will answer you soon.
-                                        Have a nice day!
-                                    </div>
-                                    <div class="modal-footer">
-
-                                        <button type="button" class="btn btn-primary" data-dismiss="modal">Accept</button>
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Deny</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </td>
+                    <td>@item.id</td>
+                    <td>@infoCustomer.Find(t => t.idDetail == item.id).headName</td>
+                    <td>@infoCustomer.Find(t => t.idDetail == item.id).headPhone</td>
+                    <td>@infoCustomer.Find(t => t.idDetail == item.id).headEmail</td>
+                    <td>@String.Format("{0:d}",item.startDate.Value)</td>
+                    <td>@String.Format("{0:d}",item.endDate.Value)</td>
+                    <td>@item.amountMoney</td>
+                    @if (item.statusOrder==0)
+                    {
+                        <td>
+                            @Ajax.ActionLink("Accept", "AcceptReplyCustomer", "Admin", new { detail = item.id }, new AjaxOptions
+                            {
+                                HttpMethod = "GET",
+                                InsertionMode = InsertionMode.Replace,
+                                UpdateTargetId = "Content"
+                            }) @Ajax.ActionLink("Deny", "DenyReplyCustomer", "Admin", new { detail = item }, new AjaxOptions
+                               {
+                                   HttpMethod = "GET",
+                                   InsertionMode = InsertionMode.Replace,
+                                   UpdateTargetId = "Content"
+                               })
+                        </td>
+                    }else if (item.statusOrder == 1)
+                    {
+                        <a href="#" class="btn btn-primary btn-lg disabled" tabindex="-1" role="button" aria-disabled="true">Accept</a>
+                    }else
+                    { 
+                        <a href="#" class="btn btn-secondary btn-lg disabled" tabindex="-1" role="button" aria-disabled="true">Deny</a>
+                    }
                 </tr>
-                <tr>
-                    <td>2</td>
-                    <td>Truong Van B</td>
-                    <td>012345688</td>
-                    <td>tvb@gmail.com</td>
-                    <td>10/17/2019</td>
-                    <td>10/20/2019</td>
-                    <td>$7000</td>
-                    <td><a href="#" class="text-primary">pending</a></td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>Tran Van C</td>
-                    <td>012348862</td>
-                    <td>cuongpro123@gmail.com</td>
-                    <td>10/17/2019</td>
-                    <td>10/19/2019</td>
-                    <td>$7000</td>
-                    <td>    <a href="#" class="text-primary">pending</a></td>
-                </tr>
+            }
             </tbody>
         </table>
     </div>
 </div>
+<script>
+    var ShowDetail = function(detail) {
+
+    }
+</script>

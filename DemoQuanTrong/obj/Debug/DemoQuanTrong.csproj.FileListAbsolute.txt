@@ -339,3 +339,5 @@ C:\Users\kishu\source\repos\DemoQuanTrongv1\DemoQuanTrong\obj\Debug\DemoQuanTron
 C:\Users\kishu\source\repos\DemoQuanTrongv1\DemoQuanTrong\obj\Debug\DemoQuanTrong.csproj.CopyComplete
 C:\Users\kishu\source\repos\DemoQuanTrongv1\DemoQuanTrong\obj\Debug\DemoQuanTrong.dll
 C:\Users\kishu\source\repos\DemoQuanTrongv1\DemoQuanTrong\obj\Debug\DemoQuanTrong.pdb
+C:\Users\kishu\source\repos\DemoQuanTrongv1\DemoQuanTrong\bin\PayPal.dll
+C:\Users\kishu\source\repos\DemoQuanTrongv1\DemoQuanTrong\bin\PayPal.xml

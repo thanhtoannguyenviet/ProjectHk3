@@ -28,13 +28,13 @@
       <PropertyRef Name="id" />
     </Key>
     <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="customerId" Type="int" />
     <Property Name="staffId" Type="int" />
     <Property Name="startDate" Type="date" />
     <Property Name="endDate" Type="date" />
     <Property Name="amountMoney" Type="decimal" Precision="20" Scale="2" />
     <Property Name="statusOrder" Type="int" />
     <Property Name="createDate" Type="date" />
+    <Property Name="paymentId" Type="int" />
   </EntityType>
   <EntityType Name="Img">
     <Key>
@@ -53,8 +53,8 @@
     <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="paymentId" Type="varchar" MaxLength="255" />
     <Property Name="totalMoney" Type="decimal" Precision="20" Scale="2" />
-    <Property Name="customerId" Type="int" />
     <Property Name="createDate" Type="date" />
+    <Property Name="customerId" Type="int" />
   </EntityType>
   <EntityType Name="Service_">
     <Key>
@@ -90,6 +90,10 @@
     <Parameter Name="tableName" Type="varchar" Mode="In" />
     <Parameter Name="userName" Type="varchar" Mode="In" />
     <Parameter Name="email" Type="varchar" Mode="In" />
+    <Parameter Name="id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="getCustomerForDetail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="int" Mode="In" />
   </Function>
   <Function Name="updateStatus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <EntityContainer Name="ExcellonModelStoreContainer">

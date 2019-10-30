@@ -14,7 +14,7 @@ namespace DemoQuanTrong.Controllers
 
     public class StaffAPIController : ApiController
     {
-        private ExcellonEntities1 db = new ExcellonEntities1();
+        private ExcellonEntities db = new ExcellonEntities();
 
         [HttpPost]
         [Route("registerStaff/")]
@@ -28,9 +28,9 @@ namespace DemoQuanTrong.Controllers
             {
                 if (accountStaff.account != null && accountStaff.staff != null)
                 {
-                    using (var entity = new ExcellonEntities1())
+                    using (var entity = new ExcellonEntities())
                     {
-                        var result = entity.checkAccount(ConstantTable.STAFF, accountStaff.account.userName, accountStaff.staff.staffEmail).ToList();
+                        var result = entity.checkAccount(ConstantTable.STAFF, accountStaff.account.userName, accountStaff.staff.staffEmail, 0).ToList();
                         if (result.Count() > 0)
                         {
                             accountStaff.messsage = MessageError.EXIST;
@@ -80,9 +80,9 @@ namespace DemoQuanTrong.Controllers
             {
                 if (accountStaff.account != null && accountStaff.staff != null)
                 {
-                    using (var entity = new ExcellonEntities1())
+                    using (var entity = new ExcellonEntities())
                     {
-                        var result = entity.checkAccount(ConstantTable.STAFF, accountStaff.account.userName, accountStaff.staff.staffEmail).ToList();
+                        var result = entity.checkAccount(ConstantTable.STAFF, accountStaff.account.userName, accountStaff.staff.staffEmail, accountStaff.id).ToList();
                         if (result.Count() > 0)
                         {
                             accountStaff.messsage = MessageError.EXIST;
@@ -94,16 +94,16 @@ namespace DemoQuanTrong.Controllers
                     accountStaff.staff.id = accountStaff.account.id;
                     db.Entry(accountStaff.staff).State = EntityState.Modified;
                     db.SaveChanges();
-                    if (accountStaff.imgs != null && accountStaff.imgs.Count() > 0)
-                    {
-                        foreach (var item in accountStaff.imgs)
-                        {
-                            item.entryName = ConstantTable.STAFF;
-                            item.entryId = accountStaff.staff.id;
-                            db.Imgs.Add(item);
-                            db.SaveChanges();
-                        }
-                    }
+                    //if (accountStaff.imgs != null && accountStaff.imgs.Count() > 0)
+                    //{
+                    //    foreach (var item in accountStaff.imgs)
+                    //    {
+                    //        item.entryName = ConstantTable.STAFF;
+                    //        item.entryId = accountStaff.staff.id;
+                    //        db.Imgs.Add(item);
+                    //        db.SaveChanges();
+                    //    }
+                    //}
 
                 }
             }
@@ -222,6 +222,185 @@ namespace DemoQuanTrong.Controllers
             }
             return Ok(service);
         }
+
+        [HttpGet]
+        [Route("findWithRole/{role}")]
+        public IHttpActionResult findWithRole(int role)
+        {
+            if (role < 20)
+            {
+                return BadRequest(ModelState);
+            }
+            else
+            {
+                try
+                {
+                    List<AccountStaff> listAccStaff = new List<AccountStaff>();
+                    string query = CustomSQL.getStaffWithRole(role + "", null, false);
+                    using (var entities = new ExcellonEntities())
+                    {
+                        var staffList = entities.Staffs
+                                .SqlQuery(query)
+                                .ToList<Staff>();
+                        if (staffList == null || staffList.Count == 0)
+                        {
+                            return NotFound();
+                        }
+
+                        foreach (var item in staffList)
+                        {
+                            AccountStaff accountStaff = new AccountStaff();
+                            string queryImg = CustomSQL.getImg(ConstantTable.STAFF, item.id + "");
+                            var imgs = entities.Imgs.SqlQuery(queryImg).ToList<Img>();
+                            accountStaff.imgs.AddRange(imgs);
+                            accountStaff.staff = item;
+                            string queryService = CustomSQL.getService(item.id);
+                            var services = entities.Service_.SqlQuery(queryService).ToList<Service_>();
+                            accountStaff.services.AddRange(services);
+                            listAccStaff.Add(accountStaff);
+                        }
+                        return Ok(listAccStaff);
+                    }
+
+                }
+                catch (Exception e)
+                {
+                    return Json(e.Message);
+                }
+
+            }
+        }
+
+        [HttpGet]
+        [Route("countWithRole/{role}")]
+        public IHttpActionResult countWithRole(int role)
+        {
+            if (role < 20)
+            {
+                return BadRequest(ModelState);
+            }
+            else
+            {
+                try
+                {
+                    string query = CustomSQL.getStaffWithRole(role + "", null, true);
+                    using (var entities = new ExcellonEntities())
+                    {
+                        var count = entities.Staffs
+                                .SqlQuery(query)
+                                .ToList<Staff>().Count;
+                        return Ok(count);
+                    }
+
+                }
+                catch (Exception e)
+                {
+                    return Json(e.Message);
+                }
+
+            }
+        }
+
+        [HttpGet]
+        [Route("findWithKeyword/{role}/{keyword}")]
+        public IHttpActionResult findWithKeyword(string role, string keyword)
+        {
+            if ("".Equals(keyword))
+            {
+                return BadRequest(ModelState);
+            }
+            else
+            {
+                try
+                {
+                    Filter filter = new Filter();
+                    filter.keyword = keyword;
+                    List<AccountStaff> listAccStaff = new List<AccountStaff>();
+                    string query = CustomSQL.getStaffWithKeyword(role, filter, false);
+                    using (var entities = new ExcellonEntities())
+                    {
+                        var staffList = entities.Staffs
+                                .SqlQuery(query)
+                                .ToList<Staff>();
+                        if (staffList == null || staffList.Count == 0)
+                        {
+                            return NotFound();
+                        }
+
+                        foreach (var item in staffList)
+                        {
+                            AccountStaff accountStaff = new AccountStaff();
+                            string queryImg = CustomSQL.getImg(ConstantTable.STAFF, item.id + "");
+                            var imgs = entities.Imgs.SqlQuery(queryImg).ToList<Img>();
+                            accountStaff.imgs.AddRange(imgs);
+                            accountStaff.staff = item;
+                            string queryService = CustomSQL.getService(item.id);
+                            var services = entities.Service_.SqlQuery(queryService).ToList<Service_>();
+                            accountStaff.services.AddRange(services);
+                            listAccStaff.Add(accountStaff);
+                        }
+                        return Ok(listAccStaff);
+                    }
+
+                }
+                catch (Exception e)
+                {
+                    return Json(e.Message);
+                }
+
+            }
+        }
+
+        [HttpGet]
+        [Route("countWithKeyword/{role}/{keyword}")]
+        public IHttpActionResult countWithKeyword(string role, string keyword)
+        {
+            if ("".Equals(keyword))
+            {
+                return BadRequest(ModelState);
+            }
+            else
+            {
+                try
+                {
+                    Filter filter = new Filter();
+                    filter.keyword = keyword;
+                    List<AccountStaff> listAccStaff = new List<AccountStaff>();
+                    string query = CustomSQL.getStaffWithKeyword(role, filter, false);
+                    using (var entities = new ExcellonEntities())
+                    {
+                        var staffList = entities.Staffs
+                                .SqlQuery(query)
+                                .ToList<Staff>();
+                        if (staffList == null || staffList.Count == 0)
+                        {
+                            return NotFound();
+                        }
+
+                        foreach (var item in staffList)
+                        {
+                            AccountStaff accountStaff = new AccountStaff();
+                            string queryImg = CustomSQL.getImg(ConstantTable.STAFF, item.id + "");
+                            var imgs = entities.Imgs.SqlQuery(queryImg).ToList<Img>();
+                            accountStaff.imgs.AddRange(imgs);
+                            accountStaff.staff = item;
+                            string queryService = CustomSQL.getService(item.id);
+                            var services = entities.Service_.SqlQuery(queryService).ToList<Service_>();
+                            accountStaff.services.AddRange(services);
+                            listAccStaff.Add(accountStaff);
+                        }
+                        return Ok(listAccStaff);
+                    }
+
+                }
+                catch (Exception e)
+                {
+                    return Json(e.Message);
+                }
+
+            }
+        }
+
 
     }
 }

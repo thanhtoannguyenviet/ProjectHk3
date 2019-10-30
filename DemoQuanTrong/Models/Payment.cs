@@ -17,7 +17,7 @@ namespace DemoQuanTrong.Models
         public int id { get; set; }
         public string paymentId { get; set; }
         public Nullable<decimal> totalMoney { get; set; }
-        public Nullable<int> customerId { get; set; }
         public Nullable<System.DateTime> createDate { get; set; }
+        public Nullable<int> customerId { get; set; }
     }
 }

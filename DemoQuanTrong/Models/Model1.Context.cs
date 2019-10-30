@@ -15,10 +15,10 @@ namespace DemoQuanTrong.Models
     using System.Data.Entity.Core.Objects;
     using System.Linq;
     
-    public partial class ExcellonEntities1 : DbContext
+    public partial class ExcellonEntities : DbContext
     {
-        public ExcellonEntities1()
-            : base("name=ExcellonEntities1")
+        public ExcellonEntities()
+            : base("name=ExcellonEntities")
         {
         }
     
@@ -36,7 +36,7 @@ namespace DemoQuanTrong.Models
         public virtual DbSet<Staff> Staffs { get; set; }
         public virtual DbSet<Temp> Temps { get; set; }
     
-        public virtual ObjectResult<checkAccount_Result> checkAccount(string tableName, string userName, string email)
+        public virtual ObjectResult<checkAccount_Result> checkAccount(string tableName, string userName, string email, Nullable<int> id)
         {
             var tableNameParameter = tableName != null ?
                 new ObjectParameter("tableName", tableName) :
@@ -50,7 +50,20 @@ namespace DemoQuanTrong.Models
                 new ObjectParameter("email", email) :
                 new ObjectParameter("email", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<checkAccount_Result>("checkAccount", tableNameParameter, userNameParameter, emailParameter);
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<checkAccount_Result>("checkAccount", tableNameParameter, userNameParameter, emailParameter, idParameter);
+        }
+    
+        public virtual ObjectResult<getCustomerForDetail_Result> getCustomerForDetail(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getCustomerForDetail_Result>("getCustomerForDetail", idParameter);
         }
     
         public virtual int updateStatus()

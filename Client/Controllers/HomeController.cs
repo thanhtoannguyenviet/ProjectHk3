@@ -30,6 +30,7 @@ namespace Client.Controllers
               return Redirect("/Admin/");
           }
           else return Redirect("/Customer/");
+          return View(new Account());
         }
         [HttpPost]
         public ActionResult LogIn()
@@ -54,6 +55,8 @@ namespace Client.Controllers
                     var staff = LoginStaff(person);
                     Session["Account"] = staff;
                     ViewBag.Name = staff.staff.staffName;
+                    var username = Common.Role.GetValue(person.role_);
+                    FormsAuthentication.SetAuthCookie(Common.Role.GetValue(person.role_), true);
                     return Redirect("/Admin/");
                 }
             }
@@ -77,11 +80,13 @@ namespace Client.Controllers
             accountCus.customer.taxCode = Request["taxCode"];
             accountCus.account.role_ = 1;
             var done = RegisterCustomer(accountCus);
-            
             if (done != null)
             {
                 Session["Account"] = done;
-                return Redirect("/Admin/");
+                ViewBag.Name = done.customer.headName;
+                var username = Common.Role.GetValue(done.account.role_);
+                FormsAuthentication.SetAuthCookie(Common.Role.GetValue(done.account.role_), true);
+                return Redirect("/Customer/");
             }
             //Chua tra ve loi khong dang ky duoc
             else return Redirect("/Home/");
