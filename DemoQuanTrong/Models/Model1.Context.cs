@@ -70,5 +70,14 @@ namespace DemoQuanTrong.Models
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("updateStatus");
         }
+    
+        public virtual int updateStatusToFinish(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("updateStatusToFinish", idParameter);
+        }
     }
 }

@@ -134,7 +134,6 @@
     <Compile Include="Common\ListServices.cs" />
     <Compile Include="Common\Role.cs" />
     <Compile Include="Controllers\AdminController.cs" />
-    <Compile Include="Controllers\ClientController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
@@ -258,6 +257,9 @@
     <Content Include="Views\Customer\View.cshtml" />
     <Content Include="Views\Customer\SettingView.cshtml" />
     <Content Include="Views\Shared\_PaymentList.cshtml" />
+    <Content Include="Views\Admin\Service.cshtml" />
+    <Content Include="Views\Shared\_SettingService.cshtml" />
+    <Content Include="Views\Shared\_PartialService.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

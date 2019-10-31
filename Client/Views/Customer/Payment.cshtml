@@ -1,5 +1,4 @@
-﻿@using Client.Models
-@model List<Client.Models.Detail>
+﻿@model IEnumerable<Client.Models.Detail>
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
@@ -23,7 +22,7 @@
         document.getElementById("total").innerHTML = reSum + " USD";
     }
     function removeFromCart(count) {
-        location.href = '/Payment/RemoveFromCart?index=' + count;
+        location.href = '/Customer/RemoveFromCart?index=' + count;
     }
 </script>
 <h2>Payment Details</h2>
@@ -35,7 +34,7 @@
         <th style="border:2px solid black; border-collapse: collapse; text-align:center">Number Of Days</th>
         <th style="border:2px solid black; border-collapse: collapse; text-align:center">Sub Total</th>
     </tr>
-    @foreach (var item in Model)
+    @if(Model!=null){foreach (var item in Model)
     {
         count++;
         sum = sum + item.amountMoney.Value;
@@ -48,11 +47,13 @@
             <td><button type="button" onclick="removeFromCart(@count)"><i class="fa fa-window-close" aria-hidden="true"></i></button></td>
         </tr>
     }
+
+    }
     <tr>
         <th colspan="4">Total</th>
         <th id="total">@sum USD</th>
     </tr>
     <tr>
-        <td colspan="6" align="right"><button type="submit" style="width:5%" onclick="location.href = '/Payment/Pay'">Pay</button></td>
+        <td colspan="6" align="right"><button type="submit" style="width:5%" onclick="location.href = '/Customer/Pay'">Pay</button></td>
     </tr>
 </table>

@@ -7,9 +7,6 @@
 
 <h2>List</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table class="table">
     <tr>
         <th>
@@ -35,11 +32,7 @@
         <td>
             @Html.DisplayFor(modelItem => item.role_)
         </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.id })
-        </td>
+
     </tr>
 }
 

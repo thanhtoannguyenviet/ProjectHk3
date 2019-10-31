@@ -1,0 +1,39 @@
+﻿@model Client.Models.AccountStaff
+
+    <div>
+        <h4>Service_</h4>
+        <hr />
+        @using(Ajax.BeginForm("SettingServiceDetail", "Admin", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "Content"})){
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.staff.staffName)
+            </dt>
+            <dd>
+
+                @Html.DisplayFor(model => model.staff.staffName)
+            </dd>
+            <dt>
+                In-bound:
+            </dt>
+            <dd>
+                <input type="checkbox" name="inbound" value="inbound" checked="@Model.services.Find(t => t.serviceName == "In-bound")" />
+            </dd>
+            <dt>
+                Out-bound:
+            </dt>
+            <dd>
+                <input type="checkbox" name="outbound" value="outbound" checked="@Model.services.Find(t => t.serviceName == "Out-bound")" />
+            </dd>
+
+            <dt>
+                Tele-Market:
+            </dt>
+            <dd>
+                <input type="checkbox" name="telemarketing" value="telemarketing" checked="@Model.services.Find(t => t.serviceName == "Tele Marketing")" />
+            </dd>
+        </dl>
+            <p>    
+                <input type="submit" value="Update" class="btn btn-outline-primary" /> 
+            </p>
+        }
+    </div>

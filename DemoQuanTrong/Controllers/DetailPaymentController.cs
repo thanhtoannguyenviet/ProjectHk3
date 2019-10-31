@@ -30,6 +30,7 @@ namespace DemoQuanTrong.Controllers
                     db.SaveChanges();
                     foreach (var item in detailPayment.details)
                     {
+                        item.paymentId = detailPayment.payment.id;
                         db.Details.Add(item);
                         db.SaveChanges();
                     }

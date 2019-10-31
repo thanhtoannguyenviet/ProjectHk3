@@ -1,0 +1,57 @@
+﻿@using Client.Models
+@model IEnumerable<Client.Models.AccountStaff>
+@{
+    ViewBag.Title = "Home Page";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    var Service = ViewBag.Service as List<Service_>;
+}
+<h2> Register Service</h2>
+<div id="Content">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>No.</th>
+                    <th>Name Staff</th>
+                    <th>Phone number</th>
+                    <th>Email</th>
+                    <th>Service</th>
+                    <th>Setting</th>
+                </tr>
+            </thead>
+            <tbody class="accordion" id="accordionExample">
+            @if (Model != null) { 
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.staff.id</td>
+                    <td>@item.staff.staffName</td>
+                    <td>@item.staff.staffPhone</td>
+                    <td>@item.staff.staffEmail</td>
+                    <td>@foreach(var i in item.services){<span>@i.serviceName&nbsp;</span>}</td>
+                    <td>
+                        @if (item.services.Count == 0)
+                        {
+                            @Ajax.ActionLink("Create", "SettingService", new { id = item.staff.id }, new AjaxOptions
+                            {
+                                HttpMethod = "POST",
+                                InsertionMode = InsertionMode.Replace,
+                                UpdateTargetId = "Content"
+                            })
+                        }
+                        else
+                        {
+                            @Ajax.ActionLink("Update", "SettingService", new { id = item.staff.id }, new AjaxOptions
+                            {
+                                HttpMethod = "POST",
+                                InsertionMode = InsertionMode.Replace,
+                                UpdateTargetId = "Content"
+                            })
+                        }
+
+                    </td>
+                </tr>
+            }
+            }
+            </tbody>
+        </table>
+    </div>

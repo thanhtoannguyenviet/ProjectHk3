@@ -37,10 +37,10 @@
                     <td>
                        @Ajax.ActionLink("BAN","BanAccount",new { id = item.staff.id }, new AjaxOptions
                        {
-                           HttpMethod = "GET",
+                           HttpMethod = "POST",
                            InsertionMode = InsertionMode.Replace,
                            UpdateTargetId = "Content"
-                       }))
+                       })
                     </td>
                 </tr>
             }

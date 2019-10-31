@@ -1,73 +1,99 @@
-﻿<div class="table-responsive">
+﻿@model IEnumerable<Client.Models.Detail>
+<div class="table-responsive">
     <table class="table">
         <thead>
             <tr class="table-secondary">
                 <th>No.</th>
-                <th>Name Customer</th>
-                <th>Phone number</th>
-                <th>Email</th>
+                <th>idStaff</th>
+                
                 <th>Start</th>
                 <th>End</th>
-                <th>Earn</th>
+                <th>Price</th>
                 <th>Status</th>
             </tr>
         </thead>
         <tbody>
+        @if (Model != null)
+        {
+            foreach (var item in Model)
+            {
             <tr>
-                <td>1</td>
-                <td>Lam Van A</td>
-                <td>012345678</td>
-                <td>lva1234@gmail.com</td>
-                <td>11/01/2019</td>
-                <td>11/02/2019</td>
-                <td>$7000</td>
+                <td>@item.id</td>
+                <td>@item.staffId</td>
+                <td>@item.createDate</td>
+                <td>@item.startDate</td>
+                <td>@item.endDate</td>
+                <td>@item.amountMoney</td>
                 <td>
-                    <a class="text-primary" data-toggle="modal" data-target="#exampleModal">
-                        pending
-                    </a>
-                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Success!</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    We send your Request to Tâm Tâm. She will answer you soon.
-                                    Have a nice day!
-                                </div>
-                                <div class="modal-footer">
-
-                                    <button type="button" class="btn btn-primary" data-dismiss="modal">Accept</button>
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Deny</button>
+                    @if (item.statusOrder == 1)
+                    {
+                        <button type="button" class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#exampleModal">
+                            Accepted
+                        </button>
+                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <!-- Huy UPD STT -->
+                                        <!-- <h5 class="modal-title" id="exampleModalLabel">Success!</h5> -->
+                                        <h5 class="modal-title" id="exampleModalLabel">Choose date hiring!</h5>
+                                        <!-- Huy UPD END -->
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <!-- Huy UPD STT -->
+                                        <!--We send your Request to Tâm Tâm. She will answer you soon.-->
+                                        <!--Have a nice day!-->
+                                        <script type="text/javascript">
+                                            function addToCart() {
+                                                    var dateStt = new Date(document.getElementById("inpDateStt").value);
+                                                    var dateEnd = new Date(document.getElementById("inpDateEnd").value);
+                                                    if (dateStt > dateEnd) {
+                                                        alert("Date end must be equal or greater than date start");
+                                                    } else {
+                                                        location.href = '/Customer/AddToCart?staffId=' + @item.id+ '&dateSTT=' +@item.startDate +
+                                                            '&dateEND=' + @item.endDate +
+                                                            '&amountMoney=' + @item.amountMoney;
+                                                    }
+                                                }
+                                        </script>
+                                        <div class="float-left">
+                                            <p>You retrieved because My Staff work very bad:</p>
+                                            <input type="checkbox" id="checkValue" onchange="changeDateFormat()" name="checkValue"/>
+                                            </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <!-- Huy ADD STT -->
+                                        <button type="button" class="btn btn-primary" onclick="addToCart()">Retrieved</button>
+                                        <!-- Huy ADD END -->
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    }
+                    else if (item.statusOrder == -1)
+                    {
+                        <span>Denied</span>
+                    }
+                    else if (item.statusOrder == 2)
+                    {
+                        <span>Finished</span>
+                    }
+                    else
+                    {
+                        <a>Retrieved</a>
+                    }
                 </td>
             </tr>
-            <tr>
-                <td>2</td>
-                <td>Truong Van B</td>
-                <td>012345688</td>
-                <td>tvb@gmail.com</td>
-                <td>10/17/2019</td>
-                <td>10/20/2019</td>
-                <td>$7000</td>
-                <td><a href="#" class="text-primary">pending</a></td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td>Tran Van C</td>
-                <td>012348862</td>
-                <td>cuongpro123@gmail.com</td>
-                <td>10/17/2019</td>
-                <td>10/19/2019</td>
-                <td>$7000</td>
-                <td>    <a href="#" class="text-primary">pending</a></td>
-            </tr>
+            }
+        }
+        else
+        {
+            <tr><h3>You don't have order with us. <a href="../">Let make it's</a> </h3></tr>
+        }
         </tbody>
     </table>
 </div>

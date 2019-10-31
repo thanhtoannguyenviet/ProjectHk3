@@ -122,5 +122,6 @@
       </ResultMapping>
     </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="updateStatus" FunctionName="ExcellonModel.Store.updateStatus" />
+    <FunctionImportMapping FunctionImportName="updateStatusToFinish" FunctionName="ExcellonModel.Store.updateStatusToFinish" />
   </EntityContainerMapping>
 </Mapping>

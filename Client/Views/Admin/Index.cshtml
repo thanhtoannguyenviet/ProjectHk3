@@ -15,46 +15,38 @@
     </script>
 }
 <div class="w3-row-padding w3-margin-bottom">
-    <div class="w3-quarter">
-        <div class="w3-container w3-red w3-padding-16">
-            <div class="w3-left"><i class="fa fa-comment w3-xxxlarge"></i></div>
-            <div class="w3-right">
-                <h3>52</h3>
+    <a href="https://mail.google.com/mail/u/0/">
+        <div class="w3-quarter">
+            <div class="w3-container w3-red w3-padding-16">
+                <div class="w3-left"><i class="fa fa-inbox w3-xxxlarge"></i></div>
+                <div class="w3-clear"></div>
+                <h4>Gmail</h4>
             </div>
-            <div class="w3-clear"></div>
-            <h4>Messages</h4>
         </div>
-    </div>
+    </a>
+
+
+  
+<a href="https://www.facebook.com/">
     <div class="w3-quarter">
-        <div class="w3-container w3-blue w3-padding-16">
-            <div class="w3-left"><i class="fa fa-eye w3-xxxlarge"></i></div>
-            <div class="w3-right">
-                <h3>99</h3>
-            </div>
-            <div class="w3-clear"></div>
-            <h4>Views</h4>
-        </div>
+    <div class="w3-container w3-blue w3-padding-16">
+        <div class="w3-left"><i class="fa fa-facebook w3-xxxlarge"></i></div>
+        <div class="w3-clear"></div>
+        <h4>Facebook</h4>
     </div>
+    </div>
+</a>
+<a href="https://office.live.com/start/Excel.aspx" >
     <div class="w3-quarter">
         <div class="w3-container w3-teal w3-padding-16">
-            <div class="w3-left"><i class="fa fa-share-alt w3-xxxlarge"></i></div>
-            <div class="w3-right">
-                <h3>23</h3>
-            </div>
+            <div class="w3-left"><i class="fa fa-file-csv w3-xxxlarge"></i></div>
             <div class="w3-clear"></div>
-            <h4>Shares</h4>
+            <h4>Excell</h4>
         </div>
+    
     </div>
-    <div class="w3-quarter">
-        <div class="w3-container w3-orange w3-text-white w3-padding-16">
-            <div class="w3-left"><i class="fa fa-users w3-xxxlarge"></i></div>
-            <div class="w3-right">
-                <h3>50</h3>
-            </div>
-            <div class="w3-clear"></div>
-            <h4>Users</h4>
-        </div>
-    </div>
+</a>
+  
 </div>
 <div class="w3-container">
     <h5>Feeds</h5>
@@ -79,7 +71,7 @@
                     <td>@item.id</td>
                     <td>@infoCustomer.Find(t => t.idDetail == item.id).headName</td>
                     <td>@infoCustomer.Find(t => t.idDetail == item.id).headPhone</td>
-                    <td>@infoCustomer.Find(t => t.idDetail == item.id).headEmail</td>
+                    <td>@infoCustomer.Find(t => t.idDetail== item.id).headEmail</td>
                     <td>@String.Format("{0:d}",item.startDate.Value)</td>
                     <td>@String.Format("{0:d}",item.endDate.Value)</td>
                     <td>@item.amountMoney</td>
@@ -100,10 +92,10 @@
                         </td>
                     }else if (item.statusOrder == 1)
                     {
-                        <a href="#" class="btn btn-primary btn-lg disabled" tabindex="-1" role="button" aria-disabled="true">Accept</a>
+                        <a href="#" class="disabled" tabindex="-1" role="button" aria-disabled="true">Accept</a>
                     }else
                     { 
-                        <a href="#" class="btn btn-secondary btn-lg disabled" tabindex="-1" role="button" aria-disabled="true">Deny</a>
+                        <a href="#" class="disabled" tabindex="-1" role="button" aria-disabled="true">Deny</a>
                     }
                 </tr>
             }

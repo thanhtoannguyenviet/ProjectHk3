@@ -4,7 +4,7 @@
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 <h2 class="bg-primary">Setting</h2>
-@if (ViewBag.Error) { 
+@if (ViewBag.Error!=null) { 
 <script type="text/javascript">
     alert("Something is wrong.Check please")
 </script>}
@@ -82,7 +82,7 @@
                     <div class="form-group">
                         @Html.LabelFor(model => model.account.pass_word, htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-10">
-                            @Html.EditorFor(model => model.account.pass_word, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.PasswordFor(model => model.account.pass_word, new { htmlAttributes = new { @class = "form-control" } })
                             @Html.ValidationMessageFor(model => model.account.pass_word, "", new { @class = "text-danger" })
                         </div>
                     </div>

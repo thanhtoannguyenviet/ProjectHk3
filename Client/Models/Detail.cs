@@ -15,5 +15,6 @@ namespace Client.Models
         public Nullable<decimal> amountMoney { get; set; }
         public Nullable<int> statusOrder { get; set; }
         public Nullable<System.DateTime> createDate { get; set; }
+        public Nullable<int> paymentId { get; set; }
     }
 }

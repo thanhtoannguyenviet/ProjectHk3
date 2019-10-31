@@ -223,6 +223,17 @@ namespace DemoQuanTrong.Controllers
             return Ok(service);
         }
 
+        [HttpPut]
+        [Route("deleteService/")]
+        public IHttpActionResult deleteService([FromBody] Service_ service)
+        {
+            if (service == null)
+                return BadRequest("Not a valid staff id");
+            db.Entry(service).State = System.Data.Entity.EntityState.Deleted;
+            db.SaveChanges();
+            return Ok();
+        }
+
         [HttpGet]
         [Route("findWithRole/{role}")]
         public IHttpActionResult findWithRole(int role)

@@ -30,6 +30,16 @@ namespace Client.Controllers
             return View(GetStaffCustomer(0));
         }
 
+        //public ActionResult Retrieved(string staffId, string dateSTT, string dateEND, string amountMoney)
+        //{
+        //    var check = false;
+        //    if (!string.IsNullOrEmpty(Request["checkValue"]))
+        //    {
+        //        check = true;
+        //    }
+        //    Detail de = new Detail() { staffId = Int32.Parse(staffId), startDate = DateTime.Parse(dateSTT), endDate = DateTime.Parse(dateEND), amountMoney = decimal.Parse(amountMoney),statusOrder = -2};
+        //    ///Viet tiep
+        //}
         [Authorize(Roles = "Customer")]
         public ActionResult AddToCart(string staffId, string dateSTT, string dateEND, string amountMoney)
         {
@@ -61,7 +71,7 @@ namespace Client.Controllers
                     //it is returned by the create function call of the payment class  
                     // Creating a payment  
                     // baseURL is the url on which paypal sendsback the data.  
-                    string baseURI = Request.Url.Scheme + "://" + Request.Url.Authority + "/Payment/Pay?";
+                    string baseURI = Request.Url.Scheme + "://" + Request.Url.Authority + "/Customer/Pay?";
                     //here we are generating guid for storing the paymentID received in session  
                     //which will be used in the payment execution  
                     var guid = Convert.ToString((new Random()).Next(100000));
@@ -97,7 +107,9 @@ namespace Client.Controllers
                     var pay = new Client.Models.Payment()
                     {
                         paymentId = executedPayment.id,
-                        totalMoney = decimal.Parse(executedPayment.transactions[0].amount.total)
+                        totalMoney = decimal.Parse(executedPayment.transactions[0].amount.total),
+                        createDate = DateTime.Now,
+                        customerId = cus.customer.id,
                     };
                     foreach (var item in ls)
                     {
@@ -109,7 +121,8 @@ namespace Client.Controllers
                             endDate = item.endDate,
                             amountMoney = item.amountMoney,
                             statusOrder = 0,
-                            createDate = DateTime.Today
+                            createDate = DateTime.Now,
+                            paymentId= pay.id,
                         };
                         lsDetails.Add(detail);
                     };
@@ -131,7 +144,7 @@ namespace Client.Controllers
                         var response = client.PostAsync("http://localhost:61143/api/payment/createOrder/", new StringContent(
                             new JavaScriptSerializer().Serialize(detailPayment), Encoding.UTF8, "application/json")).Result;
                         if (response.StatusCode != HttpStatusCode.OK)
-                            return JavaScript("Payment API Error!");
+                            return RedirectToAction("Index");
                     }
                 }
             }
@@ -247,9 +260,12 @@ namespace Client.Controllers
         [Authorize(Roles = "Customer")]
         public ActionResult Payment()
         {
-            var customer = Session["Account"] as Customer;
-            ViewBag.Count = CountPayment(customer);
-            return View(GetPayment(customer,0));
+            if (Session["cart"] != null)
+            {
+                List<Detail> ls = Session["cart"] as List<Detail>;
+                return View(ls);
+            }
+            return View();
         }
 
         [Authorize(Roles = "Customer")]

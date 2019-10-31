@@ -42,6 +42,16 @@ namespace Client.Service
                 responseTask.Wait();
             }
         }
+        private static void UpdateStatusToFinish(int id)
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("http://localhost:61143/api/account/updateStatusToFinish/"+id);
+                //HTTP GET
+                var responseTask = client.GetAsync(client.BaseAddress);
+                responseTask.Wait();
+            }
+        }
         public static AccountStaff LoginStaff(Account account)
         {
             using (HttpClient client = new HttpClient())
@@ -68,7 +78,7 @@ namespace Client.Service
                 if (response.StatusCode == HttpStatusCode.OK)
                 {
                     var readTask = JsonConvert.DeserializeObject<AccountCustomer>(response.Content.ReadAsStringAsync().Result);
-
+                    UpdateStatusToFinish(account.id);
                     return readTask;
                 }
             }

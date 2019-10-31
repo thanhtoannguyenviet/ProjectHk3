@@ -44,6 +44,7 @@ namespace Client.Controllers
                 if (person.role_ == 1)
                 {
                     var customer = LoginCustomer(person);
+                    customer.account = person;
                     Session["Account"] = customer;
                     ViewBag.Name = customer.customer.headName;
                     var username = Common.Role.GetValue(person.role_);
@@ -53,6 +54,7 @@ namespace Client.Controllers
                 else if (person.role_ > 1)
                 {
                     var staff = LoginStaff(person);
+                    staff.account = person;
                     Session["Account"] = staff;
                     ViewBag.Name = staff.staff.staffName;
                     var username = Common.Role.GetValue(person.role_);

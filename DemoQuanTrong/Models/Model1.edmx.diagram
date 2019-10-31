@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="4a1d2b067440452baa4ec6f36c7e976e" Name="Diagram1">
+      <Diagram DiagramId="af56684f2f7f4d36910b15428bc3db25" Name="Diagram1">
         <EntityTypeShape EntityType="ExcellonModel.Account" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ExcellonModel.Customer" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ExcellonModel.Detail" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />

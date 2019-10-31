@@ -60,7 +60,7 @@ namespace Client.Service
             }
             return null;
         }
-        public static AccountStaff RegisterService(AccountStaff accountStaff)
+        public static string RegisterService(AccountStaff accountStaff)
         {
             using (HttpClient client = new HttpClient())
             {
@@ -68,19 +68,19 @@ namespace Client.Service
                 var response = client.PostAsync("http://localhost:61143/api/staff/registerService/", new StringContent(
                     new JavaScriptSerializer().Serialize(accountStaff), Encoding.UTF8, "application/json")).Result;
                 if (response.StatusCode == HttpStatusCode.OK)
-                    return accountStaff;
+                    return "Regist Completed";
             }
             return null;
         }
-        public static Service_ UpdateService(Service_ service)
+        public static string UpdateService(Service_ account)
         {
             using (HttpClient client = new HttpClient())
             {
                 client.DefaultRequestHeaders.Accept.Clear();
-                var response = client.PostAsync("http://localhost:61143/api/staff/updateStaff/", new StringContent(
-                    new JavaScriptSerializer().Serialize(service), Encoding.UTF8, "application/json")).Result;
+                var response = client.PutAsync("http://localhost:61143/api/staff/deleteService/", new StringContent(
+                    new JavaScriptSerializer().Serialize(account), Encoding.UTF8, "application/json")).Result;
                 if (response.StatusCode == HttpStatusCode.OK)
-                    return service;
+                    return "UpdateCompleted";
             }
             return null;
         } 

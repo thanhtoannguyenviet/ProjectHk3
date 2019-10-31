@@ -1,4 +1,6 @@
-﻿@model IEnumerable<Client.Models.AccountStaff>
+﻿@using Client.Common
+@using Client.Models
+@model IEnumerable<Client.Models.AccountStaff>
 
 @if(Model!=null){foreach (var item in Model){
             <div class="w3-col m4 w3-margin-bottom">
@@ -32,11 +34,13 @@
                                                 function changeDateFormat() {
                                                     var dateStt = new Date(document.getElementById("inpDateStt").value);
                                                     var dateEnd = new Date(document.getElementById("inpDateEnd").value);
+                                                    var e = document.getElementById("idCat");
+                                                    var opt = e.options[e.selectedIndex].value;
                                                     var Difference_In_Time = dateEnd.getTime() - dateStt.getTime();
                                                     var Difference_In_Days = (Difference_In_Time / (1000 * 3600 * 24)) + 1;
                                                     if (!isNaN(Difference_In_Days)) {
                                                         document.getElementById("Difference_In_Days").innerHTML = Difference_In_Days;
-                                                        document.getElementById("subTotal").innerHTML = Difference_In_Days * 10;
+                                                        document.getElementById("subTotal").innerHTML = Difference_In_Days * opt;
                                                     }
                                                 }
                                                 function addToCart() {
@@ -45,7 +49,7 @@
                                                     if (dateStt > dateEnd) {
                                                         alert("Date end must be equal or greater than date start");
                                                     } else {
-                                                        location.href = '/Payment/AddToCart?staffId=' + '1' + '&dateSTT=' + document.getElementById("inpDateStt").value +
+                                                        location.href = '/Customer/AddToCart?staffId=' + @item.staff.id+ '&dateSTT=' + document.getElementById("inpDateStt").value +
                                                             '&dateEND=' + document.getElementById("inpDateEnd").value +
                                                             '&amountMoney=' + document.getElementById("subTotal").textContent;
                                                     }
@@ -61,8 +65,14 @@
                                         <div class="float-right">
                                             <table>
                                                 <tr>
-                                                    <td>Price:</td>
-                                                    <td>10</td>
+                                                    <td>Service:</td>
+                                                    <td>  <select data-val="true" data-val-required="The EnumCountry field is required."
+                                                                  id="idCat" name="idCat" onchange="changeDateFormat();">
+                                                        @foreach (Service_ c in item.services)
+                                                        {
+                                                            <option value=@ListServices.GetKey(@c.serviceName)>@c.serviceName</option>
+                                                        }
+                                                    </select></td>
                                                     <td>USD</td>
                                                 </tr>
                                                 <tr>
@@ -72,7 +82,7 @@
                                                 </tr>
                                                 <tr>
                                                     <td>Total:</td>
-                                                    <td id="subTotal">10</td>
+                                                    <td id="subTotal">4500</td>
                                                     <td>USD</td>
                                                 </tr>
                                             </table>

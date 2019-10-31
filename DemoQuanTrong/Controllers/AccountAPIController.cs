@@ -123,5 +123,16 @@ namespace DemoQuanTrong.Controllers
 
             return null;
         }
+
+        [HttpGet]
+        [Route("updateStatusToFinish/{idCus}")]
+        public string updateStatus(int idCus) //chạy để update status
+        {
+            using (var entity = new ExcellonEntities())
+            {
+                var result = entity.updateStatusToFinish(idCus);
+            }
+            return "Success";
+        }
     }
 }

@@ -185,6 +185,7 @@ namespace DemoQuanTrong.Common
         public static string findForCustomer(string tableName, string id, Filter filter, Boolean count = false)
         {
             string query = CustomSQL.QuerySelect(tableName);
+            query += " INNER JOIN Payment B ON A.paymentId = B.id ";
             query = CustomSQL.SQLWhere(query, "customerId", id);
             if (!count)
             {

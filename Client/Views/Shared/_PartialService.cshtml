@@ -1,0 +1,48 @@
+﻿@model IEnumerable<Client.Models.AccountStaff>
+@if (ViewBag.Error != null)
+{
+    <script type="text/javascript">
+        alert("Something's wrogg")
+    </script>
+}
+else
+{
+    <script>
+        alert("Success update")
+    </script>
+}
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>No.</th>
+            <th>Name Staff</th>
+            <th>Phone number</th>
+            <th>Email</th>
+            <th>Department</th>
+            <th>Detail</th>
+        </tr>
+    </thead>
+    <tbody class="accordion" id="accordionExample">
+        @if (Model != null)
+        {
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.staff.id</td>
+                    <td>@item.staff.staffName</td>
+                    <td>@item.staff.staffPhone</td>
+                    <td>@item.staff.staffEmail</td>
+                    <td>@item.staff.bankCard</td>
+                    <td>
+                        @Ajax.ActionLink("Setting", "SettingService", "Admin",new { id = item.staff.id }, new AjaxOptions
+                        {
+                            HttpMethod = "POST",
+                            InsertionMode = InsertionMode.Replace,
+                            UpdateTargetId = "Content"
+                        })
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>

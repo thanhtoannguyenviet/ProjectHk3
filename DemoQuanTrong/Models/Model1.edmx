@@ -101,6 +101,9 @@
           <Parameter Name="id" Type="int" Mode="In" />
         </Function>
         <Function Name="updateStatus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="updateStatusToFinish" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
         <EntityContainer Name="ExcellonModelStoreContainer">
           <EntitySet Name="Account" EntityType="Self.Account" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
@@ -221,6 +224,9 @@
             <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="updateStatus" />
+          <FunctionImport Name="updateStatusToFinish">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="checkAccount_Result">
           <Property Type="Int32" Name="id" Nullable="false" />
@@ -367,6 +373,7 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="updateStatus" FunctionName="ExcellonModel.Store.updateStatus" />
+          <FunctionImportMapping FunctionImportName="updateStatusToFinish" FunctionName="ExcellonModel.Store.updateStatusToFinish" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

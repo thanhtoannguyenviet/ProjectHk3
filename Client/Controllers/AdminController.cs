@@ -10,6 +10,7 @@ using System.Web.Script.Serialization;
 using Client.Models;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Client.Common;
 using static Client.Service.LoginService;
 using static Client.Service.StaffService;
 using static Client.Service.PaymentService;
@@ -38,7 +39,7 @@ namespace Client.Controllers
             var accountStaff = Session["Account"] as AccountStaff;
             return View(FindWithRole(accountStaff.account.role_));
         }
-
+        [HttpGet]
         public ActionResult AcceptReplyCustomer(int detail)
         {
             var accountSaff = Session["Account"] as AccountStaff;
@@ -47,11 +48,106 @@ namespace Client.Controllers
             var updateDetail = UpdateDetail(update);
             return RedirectToAction("Index");
         }
-
+        [HttpPost]
         public ActionResult BanAccount(int id)
         {
-
+            var accountStaff = Session["Account"] as AccountStaff;
+            var q=FindWithRole(accountStaff.account.role_).Where(t=>t.staff.id==id).FirstOrDefault();
+            q.account.role_ = -1;
+            UpdateStaff(q);
+            return RedirectToAction("Account");
         }
+
+        [Authorize(Roles = "Admin,Trainer")]
+        public ActionResult Service()
+        {
+            var accountStaff = Session["Account"] as AccountStaff;
+            return View(FindWithRole(accountStaff.account.role_));
+        }
+        [HttpPost]
+        [Authorize(Roles = "Admin,Trainer")]
+        public ActionResult SettingServiceDetail(FormCollection form)
+        {
+            
+            var inbound = false;
+            var outbound = false;
+            var telemarketing = false;
+            if (!string.IsNullOrEmpty(form["inbound"]))
+            {
+                inbound = true;
+            }
+
+            if (!string.IsNullOrEmpty(form["outbound"]))
+            {
+                outbound = true;}
+            if (!string.IsNullOrEmpty(form["telemarketing"]))
+            {
+                telemarketing = true;
+            }
+            var accountStaff = Session["Acc"] as AccountStaff;
+            List<Service_> lsService = new List<Service_>(); 
+            
+            if (inbound == true)
+            {
+                var updateService = new Client.Models.Service_();
+                updateService.serviceName = "In-bound";
+                updateService.staffId = accountStaff.staff.id;
+                lsService.Add(updateService);
+            }
+
+            if (outbound == true)
+            {
+                var updateService = new Client.Models.Service_();
+                updateService.serviceName = "Out-bound";
+                updateService.staffId = accountStaff.staff.id;
+                lsService.Add(updateService);
+            }
+
+            if (telemarketing == true)
+            {
+                var updateService = new Client.Models.Service_();
+                updateService.serviceName = "Tele Marketing";
+                updateService.staffId = accountStaff.staff.id;
+                lsService.Add(updateService);
+            }
+            string result = "";
+            if (accountStaff.services.Count ==0) { 
+            accountStaff.services = lsService;
+            result = RegisterService(accountStaff);
+            }
+            else
+            {
+                foreach (var item in accountStaff.services)
+                {
+                    UpdateService(item);
+                }
+                accountStaff.services = lsService;
+                result = RegisterService(accountStaff);
+                var update = "f";
+                if (update!= null)
+                    result = "Its update";
+            }
+            if (result != "") { 
+            return PartialView("_PartialService");
+            }
+            else
+            {
+                ViewBag.Error = 1;
+                return PartialView("_PartialService");
+            }
+        }
+        [HttpPost]
+        [Authorize(Roles = "Admin,Trainer")]
+        public ActionResult SettingService(int id)
+        {
+            var accountStaff = Session["Account"] as AccountStaff;
+            var lsacc = FindWithRole(accountStaff.account.role_);
+            var acc = lsacc.Where(a => a.staff.id == id).FirstOrDefault();
+            Session["Acc"] = acc;
+            return PartialView("_SettingService",acc);
+        }
+
+        [HttpGet]
         public ActionResult DenyReplyCustomer(int detail)
         {
             var accountSaff = Session["Account"] as AccountStaff;
@@ -70,9 +166,12 @@ namespace Client.Controllers
         [Authorize(Roles = "Admin,HR")]
         public ActionResult NewAccount(AccountStaff accountStaff)
         {
+            accountStaff.staff.staffBirtday = DateTime.Parse(Request["birthday"]);
+            accountStaff.staff.department = Request["idCat"];
+            accountStaff.staff.mistakeCount = 0;
             accountStaff.account.pass_word = EnCrypt(accountStaff.account.pass_word);
             accountStaff.staff.status_ = 1;
-            accountStaff.account.role_ = 20;
+            accountStaff.account.role_ = Role.GetKey(accountStaff.staff.department);
             accountStaff.imgs.Add(new Img(accountStaff.staff.id));
             accountStaff = RegisterStaff(accountStaff);
             return Redirect("/Admin/");
@@ -110,7 +209,8 @@ namespace Client.Controllers
                     return RedirectToAction("Index");
                 }
             }
-            ViewBag.Error=1
+
+            ViewBag.Error = 1;
             return SettingView();
         }
         [HttpPost]
